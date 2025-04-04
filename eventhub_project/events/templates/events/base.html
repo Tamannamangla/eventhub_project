@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} EventHive {% endblock %}</title>
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <!-- 🌟 Navbar Section -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="">🎉 <span class="project-name">Event</span> <span class="second-word"> Hive
+                </span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link"  href="{% url 'about' %}">About Us</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="galleryDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-photo-film me-1"></i> Gallery
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="galleryDropdown">
+                            <li><a class="dropdown-item" href="">Photos</a></li>
+                            <li><a class="dropdown-item" href="">Videos</a></li>
+                            <li><a class="dropdown-item" href="">Shorts</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href=""><i class="fa-solid fa-user me-1"></i>
+                            Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-info logout-btn" href="">
+                            <i class="fa-solid fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="../static/images/logo1.png" class="footer-logo" alt="No" height="210px" width="200px">
+            </div>
+            <div class="footer-description">
+                <p>
+                    EventHive is your one-stop destination for seamless event planning. Whether it's a birthday,
+                    wedding, corporate gathering, or any special occasion, we bring your vision to life with precision
+                    and creativity.
+                    <br>
+                    With a passionate team of event professionals, we handle everything from venue selection and décor
+                    to entertainment and catering, ensuring a stress-free and memorable experience.
+                    <br>
+                    At EventHive, we believe that every event tells a story, and we are here to make yours
+                    extraordinary. Let us take care of the details while you enjoy the moments that truly matter!
+
+                </p>
+            </div>
+            <div class="footer-contact">
+                <p><strong>Phone:</strong> +91 8168428500</p>
+                <p><strong>Fax:</strong> +1 916-875-2235</p>
+                <p><strong>Email:</strong> manglastamanna@gmail.com</p>
+                <!-- <p><strong>Website:</strong> <a href="index.html">www.EventHive.com</a></p> -->
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>OUR SERVICES</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="#why-choose-us">Services</a></li>
+                        <li><a href="#why-choose-us">Features</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>QUICK LINK</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Hire An Expert</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>RESOURCES</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Hire An Expert</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>IMPORTANT LINK</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Condition</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
