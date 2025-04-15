@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <title>Edit Ticket</title>
     <link rel="stylesheet" href="{% static 'css/edit_ticket.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="edit-container">
-        <h1>Edit Ticket</h1>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save Changes</button>
-        </form>
+    <div class="main-wrapper">
+        <div class="edit-card">
+            <a href="{% url 'bookings:dashboard3' %}" class="back-btn">← Back to Dashboard</a>
+            <h1>Edit Ticket</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">💾 Save Changes</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>

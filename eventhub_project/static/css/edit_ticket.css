@@ -1,59 +1,109 @@
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'DM Sans', sans-serif;
+    background-color: #FFF6E3;
     margin: 0;
     padding: 0;
+}
+
+.main-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-.edit-container {
-    background-color: #ffffff;
+.edit-card {
+    background-color: #FFFFFF;
     padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    width: 500px;
-    max-width: 90%;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 550px;
+    animation: fadeIn 0.5s ease-in-out;
+    position: relative;
 }
 
 h1 {
+    color: #6C63FF;
     text-align: center;
-    margin-bottom: 30px;
-    color: #343a40;
+    margin-bottom: 25px;
+    font-size: 28px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form input[type="text"],
-form input[type="file"],
-form input[type="number"],
-form textarea,
-form select {
-    padding: 12px;
+form p {
     margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #6C63FF;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select,
+textarea {
     width: 100%;
-    box-sizing: border-box;
+    padding: 12px 15px;
+    border: 2px solid #BFECFF;
+    border-radius: 12px;
+    background-color: #F7FAFF;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #CDC1FF;
+    outline: none;
 }
 
 button[type="submit"] {
-    padding: 12px;
-    background-color: #0d6efd;
-    color: white;
-    font-size: 16px;
+    background-color: #FFCCEA;
+    color: #333;
+    font-weight: 600;
     border: none;
-    border-radius: 8px;
+    padding: 14px 20px;
+    border-radius: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+    font-size: 16px;
 }
 
 button[type="submit"]:hover {
-    background-color: #0b5ed7;
+    background-color: #F9BBD1;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    text-decoration: none;
+    color: #6C63FF;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: #4A3EEA;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
