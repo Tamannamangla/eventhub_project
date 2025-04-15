@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Holiday Events - EventHub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">🎫 EventHub</div>
+            <nav class="nav">
+                <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+                <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+                <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+                <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+                <a href="{% url 'bookings:food' %}">🍴 Food</a>
+                <a href="{% url 'bookings:business' %}">👔 Business</a>
+                <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+                <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+                <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+                <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h1 class="page-title">🎉 Holiday Tickets</h1>
+            <div class="tickets">
+                <!-- Dynamically Added Tickets -->
+                {% for ticket in tickets %}
+                <div class="ticket-card">
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}">
+                    <div class="ticket-info">
+                        <h2>{{ ticket.name }}</h2>
+                        <p class="location">📍 {{ ticket.location }}</p>
+                        <p class="time">🕒 {{ ticket.time }}</p>
+                        <p class="price">{{ ticket.price }}</p>
+                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Buy Now</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="font-size: 18px; color: #666;">No dynamic tickets added yet.</p>
+                {% endfor %}
+           
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1608889176208-9f3b92e73f01" alt="Christmas Market">
+                <div class="ticket-info">
+                    <h2>Christmas Market Fest</h2>
+                    <p class="location">📍 Delhi Central Park</p>
+                    <p class="time">🕒 Dec 24 · 4:00 PM</p>
+                    <p class="price">Free</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1513639725746-c5d3e861f32a" alt="New Year">
+                <div class="ticket-info">
+                    <h2>New Year Bash</h2>
+                    <p class="location">📍 Mumbai Grand Hall</p>
+                    <p class="time">🕒 Dec 31 · 9:00 PM</p>
+                    <p class="price">₹1500</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1542343639-ff4c64e752b5" alt="Diwali Night">
+                <div class="ticket-info">
+                    <h2>Diwali Dhamaka</h2>
+                    <p class="location">📍 Jaipur Palace Grounds</p>
+                    <p class="time">🕒 Nov 12 · 6:00 PM</p>
+                    <p class="price">₹1200</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1519861531473-9200262188ef" alt="Holi Celebration">
+                <div class="ticket-info">
+                    <h2>Holi Color Splash</h2>
+                    <p class="location">📍 Lucknow Riverfront</p>
+                    <p class="time">🕒 Mar 8 · 10:00 AM</p>
+                    <p class="price">₹500</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1583512603872-d8a6d0b2b0c1" alt="Eid Fest">
+                <div class="ticket-info">
+                    <h2>Eid Celebration</h2>
+                    <p class="location">📍 Hyderabad Garden</p>
+                    <p class="time">🕒 Apr 22 · 5:00 PM</p>
+                    <p class="price">₹750</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde" alt="Independence Day">
+                <div class="ticket-info">
+                    <h2>Independence Parade</h2>
+                    <p class="location">📍 Red Fort, Delhi</p>
+                    <p class="time">🕒 Aug 15 · 8:00 AM</p>
+                    <p class="price">Free</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1617196039896-1a3a4b0f2b36" alt="Republic Day">
+                <div class="ticket-info">
+                    <h2>Republic Day Function</h2>
+                    <p class="location">📍 India Gate</p>
+                    <p class="time">🕒 Jan 26 · 9:00 AM</p>
+                    <p class="price">Free</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327" alt="Ganesh Chaturthi">
+                <div class="ticket-info">
+                    <h2>Ganesh Visarjan</h2>
+                    <p class="location">📍 Mumbai Marina</p>
+                    <p class="time">🕒 Sep 10 · 3:00 PM</p>
+                    <p class="price">₹300</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1542736667-069246bdbc82" alt="Navratri Night">
+                <div class="ticket-info">
+                    <h2>Navratri Garba Night</h2>
+                    <p class="location">📍 Ahmedabad Arena</p>
+                    <p class="time">🕒 Oct 4 · 8:00 PM</p>
+                    <p class="price">₹1100</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504198266285-165a14b4b69b" alt="Pongal">
+                <div class="ticket-info">
+                    <h2>Pongal Festival</h2>
+                    <p class="location">📍 Chennai Open Grounds</p>
+                    <p class="time">🕒 Jan 15 · 10:00 AM</p>
+                    <p class="price">₹400</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1578926071436-26719b5b6b2b" alt="Lohri Festival">
+                <div class="ticket-info">
+                    <h2>Lohri Bonfire Bash</h2>
+                    <p class="location">📍 Punjab Village Resort</p>
+                    <p class="time">🕒 Jan 13 · 7:00 PM</p>
+                    <p class="price">₹850</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1508923567004-3a6b8004f3d2" alt="Raksha Bandhan">
+                <div class="ticket-info">
+                    <h2>Raksha Bandhan Carnival</h2>
+                    <p class="location">📍 Bhopal Lake View</p>
+                    <p class="time">🕒 Aug 3 · 5:00 PM</p>
+                    <p class="price">₹600</p>
+                </div>
+            </div>
+    </div>
+    </main>
+</div>
+</body>
+
+</html>

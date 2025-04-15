@@ -1,0 +1,195 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Food Events - EventHub</title>
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">🎫 EventHub</div>
+            <nav class="nav">
+                <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+                <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+                <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+                <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+                <a href="{% url 'bookings:food' %}">🍴 Food</a>
+                <a href="{% url 'bookings:business' %}">👔 Business</a>
+                <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+                <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+                <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+                <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h1 class="page-title">🍴 Food Tickets</h1>
+            <div class="tickets">
+                <!-- Dynamically Added Tickets -->
+                {% for ticket in tickets %}
+                <div class="ticket-card">
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}">
+                    <div class="ticket-info">
+                        <h2>{{ ticket.name }}</h2>
+                        <p class="location">📍 {{ ticket.location }}</p>
+                        <p class="time">🕒 {{ ticket.time }}</p>
+                        <p class="price">{{ ticket.price }}</p>
+                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Buy Now</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="font-size: 18px; color: #666;">No dynamic tickets added yet.</p>
+                {% endfor %}
+            
+            <!-- ticket 1 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="food fest">
+                <div class="ticket-info">
+                    <h2>Street Food Fiesta</h2>
+                    <p class="location">📍 Delhi Food Market</p>
+                    <p class="time">🕒 Apr 18 · 5:00 PM</p>
+                    <p class="price">₹200</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 2 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="cooking class">
+                <div class="ticket-info">
+                    <h2>MasterChef Class</h2>
+                    <p class="location">📍 Bangalore Kitchen Studio</p>
+                    <p class="time">🕒 Apr 21 · 11:00 AM</p>
+                    <p class="price">₹999</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 3 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="cooking class">
+                <div class="ticket-info">
+                    <h2>Gourmet Cooking Class</h2>
+                    <p class="location">📍 Mumbai Culinary Academy</p>
+                    <p class="time">🕒 Apr 23 · 2:00 PM</p>
+                    <p class="price">₹1200</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 4 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="food fest">
+                <div class="ticket-info">
+                    <h2>Global Cuisine Festival</h2>
+                    <p class="location">📍 Delhi Food Plaza</p>
+                    <p class="time">🕒 Apr 25 · 4:00 PM</p>
+                    <p class="price">₹800</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 5 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="cooking class">
+                <div class="ticket-info">
+                    <h2>Italian Pasta Making</h2>
+                    <p class="location">📍 Bangalore Italian Kitchen</p>
+                    <p class="time">🕒 Apr 28 · 3:00 PM</p>
+                    <p class="price">₹1100</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 6 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="food fest">
+                <div class="ticket-info">
+                    <h2>Vegan Cooking Workshop</h2>
+                    <p class="location">📍 Pune Healthy Kitchen</p>
+                    <p class="time">🕒 May 2 · 10:00 AM</p>
+                    <p class="price">₹750</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 7 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="cooking class">
+                <div class="ticket-info">
+                    <h2>Sushi Making Class</h2>
+                    <p class="location">📍 Mumbai Japanese Cuisine School</p>
+                    <p class="time">🕒 May 4 · 12:00 PM</p>
+                    <p class="price">₹1400</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 8 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="food fest">
+                <div class="ticket-info">
+                    <h2>Food Truck Carnival</h2>
+                    <p class="location">📍 Bangalore Food Park</p>
+                    <p class="time">🕒 May 6 · 5:30 PM</p>
+                    <p class="price">₹400</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 9 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="cooking class">
+                <div class="ticket-info">
+                    <h2>Chocolate Making Workshop</h2>
+                    <p class="location">📍 Pune Sweet Lab</p>
+                    <p class="time">🕒 May 8 · 3:00 PM</p>
+                    <p class="price">₹500</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 10 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="food fest">
+                <div class="ticket-info">
+                    <h2>BBQ Weekend</h2>
+                    <p class="location">📍 Delhi BBQ Park</p>
+                    <p class="time">🕒 May 12 · 2:00 PM</p>
+                    <p class="price">₹600</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 11 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" alt="cooking class">
+                <div class="ticket-info">
+                    <h2>Bakery and Pastry Workshop</h2>
+                    <p class="location">📍 Bangalore Pastry Lab</p>
+                    <p class="time">🕒 May 14 · 11:00 AM</p>
+                    <p class="price">₹950</p>
+                  
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- ticket 12 -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="food fest">
+                <div class="ticket-info">
+                    <h2>Spice and Grill Fest</h2>
+                    <p class="location">📍 Mumbai Spice Market</p>
+                    <p class="time">🕒 May 17 · 6:00 PM</p>
+                    <p class="price">₹700</p>
+                  
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+
+</html>

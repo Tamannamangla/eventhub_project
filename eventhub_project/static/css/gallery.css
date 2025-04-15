@@ -1,0 +1,160 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  border-color: rgb(143, 238, 238);
+} */
+/* .boddy{
+  margin-top: 58px;
+
+} */
+.container {
+  
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+}
+.container, .wrapper {
+  padding: 0 !important;
+  margin: 0 auto;
+  max-width: 100% !important;
+}
+
+
+.hero-section {
+  width: 100%;       
+  margin: 0;
+  padding: 0;
+  border-radius: 0 ;
+}
+
+
+.hero-section img,
+.hero-section > div {
+  width: 100%;
+  border-radius: 0 !important;
+}
+
+
+/* Container for the gallery */
+.gallery {
+  column-count: 4;
+  column-gap: 10px;
+  max-width: 1500px;
+  padding: 60px 20px;
+  /* width: 100%; */
+  max-width: 1300px;
+  margin-left: 50px;
+  margin-right: 50px;
+
+
+  
+}
+.gallery, .photo-card {
+  overflow: hidden;
+}
+
+
+/* Individual photo card */
+.photo-card {
+  /* break-inside: avoid; */
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  transform: scale(1);
+  opacity: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  animation: zoomIn 0.8s ease forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+/* Images */
+.photo-card img {
+  width: 100%;
+  display: block;
+  border-radius: 15px;
+  transition: transform 0.5s ease;
+}
+
+/* Hover zoom effect */
+.photo-card:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Scroll zoom-in animation */
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.4) translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Optional responsiveness */
+@media (max-width: 1200px) {
+  .gallery {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    column-count: 1;
+  }
+}
+
+/* Section title */
+.cont {
+  width: 100%;
+  background-image: url('https://images.pexels.com/photos/169193/pexels-photo-169193.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.cont h1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 82px;
+  color: #0f0f0f;
+  animation: fadeInMove 2s ease-in-out forwards;
+}
+
+/* Entry animation */
+@keyframes fadeInMove {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

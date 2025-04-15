@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile | EventHive</title>
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/a2e0e6fc15.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <div class="profile-container">
+        <aside class="sidebar">
+            <h2>EventHive</h2>
+            <ul>
+                <li><a href="{% url 'bookings:index2' %}">Home</a></li>
+                <li><a href="{% url 'home' %}">Main Home Page</a></li>
+                <li><a href="{% url 'gallery' %}">Photo Gallery</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% if request.user.is_superuser %}
+                    <li><a href="{% url 'super_admin_dashboard' %}">Main Dashboard</a></li>
+                {% elif request.user.is_staff == 'event_manager' %}
+                    <li><a href="{% url 'dashboard' %}">Manager Dashboard</a></li>
+                {% elif request.user.is_staff == 'admin' %}
+                    <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                {% endif %}
+                <li><a href="{% url 'event' %}">Events</a></li>
+               
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="card">
+                <div class="profile-pic-wrapper">
+                    <img src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/default-profile.png' %}{% endif %}" 
+                        alt="Profile Picture" class="profile-pic">
+                </div>
+
+                <div class="user-info">
+                    <h2>{{ profile.user.get_full_name }}</h2>
+                    <div class="info-grid">
+                        <p><strong>Email:</strong> {{ profile.email }}</p>
+                        <p><strong>Phone:</strong> {{ profile.phone }}</p>
+                        <p><strong>DOB:</strong> {{ profile.dob }}</p>
+                        <p><strong>Gender:</strong> {{ profile.gender }}</p>
+                        <p><strong>Hobbies:</strong> {{ user_profile.hobbies }}</p>
+                        <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+                        <p><strong>Address:</strong> {{ user_profile.address }}</p>
+                        <p><strong>Social:</strong>
+                            {% if user_profile.social_media %}
+                                <a href="{{ user_profile.social_media }}" target="_blank" class="social-link">
+                                    <i class="fab fa-instagram">{{user_profile.social_media}}</i> 
+                                </a>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </p>
+                        <p><strong>Notifications:</strong> {{ user_profile.notifications|yesno:"Enabled,Disabled" }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{% url 'edit_profile' %}" class="edit-btn">Edit Profile</a>
+        </main>
+    </div>
+</body>
+</html>

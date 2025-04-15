@@ -1,0 +1,192 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Date Night Events - EventHub</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">🎫 EventHub</div>
+            <nav class="nav">
+                <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+                <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+                <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+                <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+                <a href="{% url 'bookings:food' %}">🍴 Food</a>
+                <a href="{% url 'bookings:business' %}">👔 Business</a>
+                <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+                <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+                <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+                <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h1 class="page-title">💖 Romantic Date Nights Tickets</h1>
+            <div class="tickets">
+                <!-- Dynamically Added Tickets -->
+                {% for ticket in tickets %}
+                <div class="ticket-card">
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}">
+                    <div class="ticket-info">
+                        <h2>{{ ticket.name }}</h2>
+                        <p class="location">📍 {{ ticket.location }}</p>
+                        <p class="time">🕒 {{ ticket.time }}</p>
+                        <p class="price">{{ ticket.price }}</p>
+                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Buy Now</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="font-size: 18px; color: #666;">No dynamic tickets added yet.</p>
+                {% endfor %}
+           
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="candlelight dinner">
+                <div class="ticket-info">
+                    <h2>Candlelight Dinner</h2>
+                    <p class="location">📍 Bangalore Lakeside</p>
+                    <p class="time">🕒 Sat, Apr 20 · 7:00 PM</p>
+                    <p class="price">₹1800</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf" alt="movie under stars">
+                <div class="ticket-info">
+                    <h2>Movie Under the Stars</h2>
+                    <p class="location">📍 Pune Open Grounds</p>
+                    <p class="time">🕒 Fri, Apr 21 · 8:00 PM</p>
+                    <p class="price">₹900</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809" alt="couple spa">
+                <div class="ticket-info">
+                    <h2>Couple Spa Evening</h2>
+                    <p class="location">📍 Goa Beach Resort</p>
+                    <p class="time">🕒 Sun, Apr 23 · 5:00 PM</p>
+                    <p class="price">₹2500</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1551022379-008a004d44c4" alt="romantic cruise">
+                <div class="ticket-info">
+                    <h2>Romantic Cruise Dinner</h2>
+                    <p class="location">📍 Kochi Marina</p>
+                    <p class="time">🕒 Sat, Apr 29 · 6:00 PM</p>
+                    <p class="price">₹3200</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455" alt="paint night">
+                <div class="ticket-info">
+                    <h2>Paint & Sip</h2>
+                    <p class="location">📍 Hyderabad Studio Lounge</p>
+                    <p class="time">🕒 Fri, May 2 · 7:00 PM</p>
+                    <p class="price">₹800</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1582105526968-56cba1e2e32f" alt="dance class">
+                <div class="ticket-info">
+                    <h2>Couple Salsa Class</h2>
+                    <p class="location">📍 Delhi Dance Academy</p>
+                    <p class="time">🕒 Thu, May 4 · 6:30 PM</p>
+                    <p class="price">₹1000</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1574175679500-58b131c8c61d" alt="stargazing">
+                <div class="ticket-info">
+                    <h2>Stargazing Night</h2>
+                    <p class="location">📍 Manali Hills</p>
+                    <p class="time">🕒 Sat, May 6 · 10:00 PM</p>
+                    <p class="price">₹650</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1602751584949-43c98d3a8806" alt="horse ride">
+                <div class="ticket-info">
+                    <h2>Horse Ride by Sunset</h2>
+                    <p class="location">📍 Udaipur Meadows</p>
+                    <p class="time">🕒 Sun, May 7 · 6:00 PM</p>
+                    <p class="price">₹1400</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1610136979967-c980ddf6f735" alt="cooking">
+                <div class="ticket-info">
+                    <h2>Romantic Cooking Class</h2>
+                    <p class="location">📍 Mumbai Chef Studio</p>
+                    <p class="time">🕒 Wed, May 10 · 5:30 PM</p>
+                    <p class="price">₹1200</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0" alt="picnic">
+                <div class="ticket-info">
+                    <h2>Sunset Picnic Date</h2>
+                    <p class="location">📍 Kolkata River Bank</p>
+                    <p class="time">🕒 Sat, May 13 · 5:00 PM</p>
+                    <p class="price">₹600</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d" alt="valentine">
+                <div class="ticket-info">
+                    <h2>Valentine’s Night Ball</h2>
+                    <p class="location">📍 Jaipur Royal Hall</p>
+                    <p class="time">🕒 Feb 14 · 8:00 PM</p>
+                    <p class="price">₹2000</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1533106418989-88406c7cc8e8" alt="hot air balloon">
+                <div class="ticket-info">
+                    <h2>Hot Air Balloon Ride</h2>
+                    <p class="location">📍 Lonavala Skyfield</p>
+                    <p class="time">🕒 Sun, May 20 · 5:30 AM</p>
+                    <p class="price">₹5000</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+    </div>
+    </main>
+</div>
+</body>
+
+</html>

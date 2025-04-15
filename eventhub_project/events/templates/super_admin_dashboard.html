@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} EventHive {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="container">
+
+    <h1>Welcome, Superadmin {{ user.name }}!</h1>
+
+    <div class="row">
+        <!-- Add admin -->
+        <div class="card">
+            <h3 class="card-title">Add Admin</h3>
+            {% if user.is_staff %}
+
+            <a href="{% url 'add_admin' %}" class="btn btn-success">Go</a>
+            {% endif %}
+        </div>
+
+        <!-- Add Event Card -->
+        <div class="card">
+            <h3 class="card-title">Add Event Manager</h3>
+            {% if user.is_staff %}
+
+            <a href="{% url 'add_event_manager' %}" class="btn btn-warning">Go</a>
+            {% endif %}
+
+
+        </div>
+
+        <!-- Add Event Manager Card -->
+        <div class="card">
+            <h3 class="card-title">Add Events</h3>
+            {% if user.is_staff %}
+            <a href="{% url 'add_event' %}" class="btn btn-success">Go</a>
+            {% endif %}
+        </div>
+       
+    </div>
+</div>
+{% endblock %}

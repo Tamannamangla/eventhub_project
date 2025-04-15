@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="extra"></div>
+    <h2 class="mt-4">Edit Event</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="name" class="form-label">Event Name</label>
+            <input type="text" class="form-control" name="name" value="{{ event.name }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-control">
+                <option value="ceremony" {% if event.category == "ceremony" %}selected{% endif %}>Ceremony</option>
+                <option value="birthday" {% if event.category == "birthday" %}selected{% endif %}>Birthday</option>
+                <option value="anniversary" {% if event.category == "anniversary" %}selected{% endif %}>Anniversary</option>
+                <option value="wedding" {% if event.category == "wedding" %}selected{% endif %}>Wedding</option>
+                <option value="baby-shower" {% if event.category == "baby-shower" %}selected{% endif %}>Baby Shower</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" name="location" value="{{ event.location }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" name="date" value="{{ event.date|date:'Y-m-d' }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="description" required>{{ event.description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="image_url" class="form-label">Image URL</label>
+            <input type="text" class="form-control" name="image_url" value="{{ event.image_url }}">
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Event</button>
+        <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

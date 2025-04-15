@@ -1,0 +1,64 @@
+   /* Admins Table Styling */
+
+   h2.text-center {
+    font-size: 2rem;
+    margin-top: 20px;
+    color: #343a40;
+    font-weight: 700;
+}
+
+.container1 {
+    margin-top: 40px;
+    max-width: 95%;
+    overflow-x: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+thead {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.3s ease;
+}
+
+th {
+    font-weight: bold;
+    font-size: 0.96rem;
+}
+
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        font-size: 0.8rem;
+    }
+
+    .container {
+        padding: 10px;
+    }
+}

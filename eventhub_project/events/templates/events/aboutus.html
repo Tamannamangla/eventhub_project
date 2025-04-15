@@ -1,9 +1,49 @@
-{% extends "events/base.html" %}
 {% load static %}
-{% block title_block %}
-About Us page
-{% endblock %}
-{% block content %}
-<h1>About Us</h1>
-<p>This is the About Us page of the Event Management System.</p>
-{% endblock %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Event Management System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+</head>
+<body>
+
+    <div class="floating-shapes"></div>
+    <div class="container">
+        <a href="{% url 'home' %}"> <i class="fa-solid fa-house fa-2x" style="color: #ffffff;"></i></a>
+
+        <h1>Welcome to Our Event Hive</h1>
+        <p>We craft extraordinary experiences, ensuring every event is seamlessly executed, from corporate summits to lavish weddings. Our cutting-edge platform facilitates effortless planning and management, bringing your dream event to reality.</p>
+        
+        <h2>Events We Masterfully Organize</h2>
+        <ul>
+            <li>Corporate Summits & Conferences</li>
+            <li>Luxury Weddings & Grand Receptions</li>
+            <li>Live Concerts & Music Festivals</li>
+            <li>Exclusive Birthday & Anniversary Galas</li>
+            <li>Charity Fundraisers & Community Events</li>
+            <li>Product Launches & Expos</li>
+        </ul>
+
+        <h2>Why Partner with Us?</h2>
+        <p>We provide innovative solutions that encompass venue selection, vendor coordination, guest management, and budget control. Our technology-driven approach ensures a hassle-free experience with real-time updates and precision planning.</p>
+
+        <h2>Comprehensive Services</h2>
+        <ul>
+            <li>Expert Event Planning & Execution</li>
+            <li>Premium Vendor & Venue Management</li>
+            <li>Personalized Guest List Coordination</li>
+            <li>Budget Optimization & Financial Tracking</li>
+            <li>On-site Event Management & Support</li>
+        </ul>
+
+        <h2>Contact Us</h2>
+        <p>Let's make your event extraordinary! Reach out to us at <strong>contact@eventmanagement.com</strong> or call <strong>+123 456 7890</strong> for a consultation.</p>
+        
+        <a href="#" class="button">Get Started</a>
+    </div>
+
+    <script src="{% static 'css/aboutus.js' %}"></script>
+</body>
+</html>

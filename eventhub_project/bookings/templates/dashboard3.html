@@ -1,0 +1,450 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Reset and Base */
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background: #f0f4ff;
+        }
+
+        /* Layout Wrapper */
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background: #c8bfff;
+            color: #fff;
+            padding: 2rem 1rem;
+        }
+
+        .sidebar h2 {
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #fff;
+        }
+
+        .sidebar ul li:hover,
+        .sidebar ul li.active {
+            background: #ffccdd;
+            color: #333;
+        }
+
+        .icon {
+            margin-right: 0.5rem;
+        }
+
+        /* Main Content Area */
+        .main-content-area {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Top Section: Form + Image */
+        .form-image-top {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        /* Form Card */
+        .form-card {
+            flex: 1;
+            background: #fff6e3;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .form-card h2 {
+            margin-bottom: 1rem;
+        }
+
+        .form-card label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .form-card input,
+        .form-card select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .form-card button {
+            background: #78B6F2;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Ticket Image */
+        .ticket-image {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .ticket-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Category Box */
+        .category-box {
+            background: #fff6e3;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .category-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cat-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background-color: #CDC1FF;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Different Category Colors */
+        .cat-btn.music {
+            background: #A7C4FF;
+            color: #222;
+        }
+
+        .cat-btn.arts {
+            background: #CDC1FF;
+            color: #222;
+        }
+
+        .cat-btn.food {
+            background: #FFE299;
+            color: #222;
+        }
+
+        .cat-btn.business {
+            background: #B5D8FF;
+            color: #222;
+        }
+
+        .cat-btn.hobbies {
+            background: #FFCCEA;
+            color: #222;
+        }
+
+        .cat-btn.nightlife {
+            background: #9C7CFF;
+            color: #fff;
+        }
+
+        .cat-btn.holidays {
+            background: #FFC9C9;
+            color: #222;
+        }
+
+        .cat-btn.sports {
+            background: #BFFCC6;
+            color: #222;
+        }
+
+        /* Responsive for smaller screens */
+        @media (max-width: 768px) {
+            .form-image-top {
+                flex-direction: column;
+            }
+
+            .ticket-image,
+            .form-card {
+                max-width: 100%;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .dashboard-wrapper {
+                flex-direction: column;
+            }
+        }
+
+        /* Centered and Stylish Heading for Add New Ticket */
+        .form-card h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+            color: #333;
+            background: linear-gradient(to right, #78B6F2, #CDC1FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Centered and Styled h3 for Ticketegories */
+        .category-box h3 {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+            position: relative;
+        }
+
+        .category-box h3::after {
+            content: "";
+            width: 60px;
+            height: 3px;
+            background: #CDC1FF;
+            display: block;
+            margin: 0.5rem auto 0;
+            border-radius: 5px;
+        }
+
+        /* Bigger Category Buttons with Better Spacing */
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 1.5rem;
+            justify-content: center;
+        }
+
+        .cat-btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        .ticket-category-section {
+            margin-bottom: 4rem;
+            padding: 0 2rem;
+        }
+
+        .ticket-category-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #4b3f72;
+        }
+
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .ticket-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ticket-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .ticket-card h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .ticket-card p {
+            margin: 4px 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .actions {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .actions .delete-btn {
+            background-color: #ffcccc;
+            color: #b30000;
+        }
+
+        .actions a:not(.delete-btn) {
+            background-color: #cce5ff;
+            color: #004080;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>EventHub</h2>
+            <ul>
+                <ul>
+                    <li><i class="icon">🏠</i> <a href="{% url 'bookings:index2' %}"
+                            style="text-decoration: none; color: inherit;">Home</a></li>
+                    <li><i class="icon">📊</i> <a href="{% url 'bookings:dashboard3' %}"
+                            style="text-decoration: none; color: inherit;">Dashboard</a></li>
+                    <li><i class="icon">🎵</i> <a href="{% url 'bookings:music' %}"
+                            style="text-decoration: none; color: inherit;">Music</a></li>
+                    <li><i class="icon">🎭</i> <a href="{% url 'bookings:art' %}"
+                            style="text-decoration: none; color: inherit;">Arts</a></li>
+                    <li><i class="icon">🍴</i> <a href="{% url 'bookings:food' %}"
+                            style="text-decoration: none; color: inherit;">Food</a></li>
+                    <li><i class="icon">👔</i> <a href="{% url 'bookings:business' %}"
+                            style="text-decoration: none; color: inherit;">Business</a></li>
+                    <li><i class="icon">🎮</i> <a href="{% url 'bookings:hobbies' %}"
+                            style="text-decoration: none; color: inherit;">Hobbies</a></li>
+                    <li><i class="icon">🌃</i> <a href="{% url 'bookings:nightlife' %}"
+                            style="text-decoration: none; color: inherit;">Nightlife</a></li>
+                    <li><i class="icon">🎉</i> <a href="{% url 'bookings:holidays' %}"
+                            style="text-decoration: none; color: inherit;">Holidays</a></li>
+                    <li><i class="icon">💖</i> <a href="{% url 'bookings:dates' %}"
+                            style="text-decoration: none; color: inherit;">Dates</a></li>
+                </ul>
+
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <!-- Two-column section -->
+        <div class="main-content-area">
+            <!-- Top: Form and Image -->
+            <div class="form-image-top">
+                <!-- Form Card -->
+                <div class="form-card">
+                    <h2>Add New Ticket</h2>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="primary-btn">+ Add Ticket</button>
+                    </form>
+                </div>
+
+                <!-- Ticket Image -->
+                <div class="ticket-image">
+                    <img src="{% static 'images/ticket_banner.png' %}" alt="Event Image">
+                </div>
+            </div>
+
+            <!-- Category Section -->
+            <div class="category-box">
+                <h3>Ticketegories</h3>
+                <div class="category-buttons">
+                    <span class="cat-btn music">Music</span>
+                    <span class="cat-btn arts">Arts</span>
+                    <span class="cat-btn food">Food</span>
+                    <span class="cat-btn business">Business</span>
+                    <span class="cat-btn hobbies">Hobbies</span>
+                    <span class="cat-btn nightlife">Nightlife</span>
+                    <span class="cat-btn holidays">Holidays</span>
+                    <span class="cat-btn sports">Sports</span>
+                </div>
+            </div>
+        
+
+        <hr>
+
+
+        <section id="tickets-section" class="tickets-section fade-in-section">
+            <h2>Your Tickets</h2>
+
+            {% if categorized_tickets %}
+            {% for category, ticket_list in categorized_tickets.items %}
+            <div class="tickets-section">
+                <h2>{{ category }}</h2>
+                <div class="ticket-grid">
+                    {% for ticket in ticket_list %}
+                    <div class="ticket-card">
+                        <img src="{{ ticket.image.url }}" alt="ticket image" style="height: 100px;" />
+                        <h3>{{ ticket.name }}</h3>
+                        <p>📍 {{ ticket.location }}</p>
+                        <p>🕒 {{ ticket.time }}</p>
+                        <p>💵 {{ ticket.price }}</p>
+                        <div class="actions">
+                            <a href="{% url 'bookings:delete_ticket' ticket.id %}" class="delete-btn"
+                                onclick="return confirm('Are you sure you want to delete this ticket?');">🗑️ Delete</a>
+                            <a href="{% url 'bookings:edit_ticket' ticket.id %}">Edit</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No tickets available yet.</p>
+            {% endif %}
+
+
+
+        </section>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Admin{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/edit_admin.css' %}">{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Edit Admin</h2>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Changes</button>
+        <a href="{% url 'list_admins' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,418 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Music Events - EventHub</title>
+  <link rel="stylesheet" href="{% static 'css/music.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #BFECFF;
+      color: #333;
+      overflow: hidden;
+    }
+
+    .layout {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #CDC1FF;
+      color: #1b1b1b;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      height: 40px;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #f70f96;
+    }
+
+    .nav a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: background-color 0.3s, padding 0.3s;
+    }
+
+    .nav a:hover,
+    .nav .active {
+      background-color: #f973c1;
+      color: #222;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px 60px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .page-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #f367b8;
+      text-align: left;
+    }
+
+    .tickets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .ticket-card {
+      background: #FFF6E3;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      width: 280px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ticket-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .ticket-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .ticket-info {
+      padding: 16px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ticket-info h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .ticket-info p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .ticket-info .price {
+      font-weight: 600;
+      color: #f70f96;
+    }
+
+
+    .btn-book {
+      background-color: #f70f96;
+      /* vibrant pink/red */
+      color: #fff;
+      /* white text */
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-book:hover {
+      background-color: #e6365f;
+      transform: scale(1.05);
+    }
+
+    .btn-book:active {
+      background-color: #cc2e53;
+      transform: scale(0.97);
+    }
+
+
+
+
+    .sidebar::-webkit-scrollbar,
+    .content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb,
+    .content::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+
+    .nav a:hover,
+    .nav .active {
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+
+    /* Responsive design: 3 cards per row on large screens, 2 on medium, and 1 on small screens */
+    @media (max-width: 1200px) {
+      .ticket-card {
+        width: 45%;
+        /* 2 cards per row */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ticket-card {
+        width: 100%;
+        /* 1 card per row */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">🎫 EventHub</div>
+      <nav class="nav">
+        <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+        <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+        <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+        <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+        <a href="{% url 'bookings:food' %}">🍴 Food</a>
+        <a href="{% url 'bookings:business' %}">👔 Business</a>
+        <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+        <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+        <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+        <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+        <a href="{% url 'bookings:view_cart' %}" class="active"><i class="fas fa-shopping-cart">cart</i>  </a>
+
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+
+ 
+      <h1 class="page-title">🎵 Music Tickets</h1>
+
+        <div class="tickets">
+          <!-- ticket 1 -->
+          {% for ticket in tickets %}
+
+        <div class="ticket-card">
+          <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}" style="height:180px;">
+          <h3>{{ ticket.name }}</h3>
+          <p>📍 {{ ticket.location }}</p>
+          <p>🕒 {{ ticket.time }}</p>
+          <p>💵 {{ ticket.price }}</p>
+          <p>🎫 Category: {{ ticket.category }}</p>
+          <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Buy Now</button>
+          </form>
+        </div>
+        {% empty %}
+        <p>No tickets available for this category.</p>
+        {% endfor %}
+
+        <div class="ticket-card">
+          <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc" alt="concert">
+          <div class="ticket-info">
+            <h2>Rock Legends Live</h2>
+            <p class="location">📍 Delhi Stadium</p>
+            <p class="time">🕒 Sat, Apr 20 · 7:00 PM</p>
+            <p class="price"> ₹999 </p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+        <!-- ticket 2 -->
+
+        <div class="ticket-card">
+          <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947" alt="dj event">
+          <div class="ticket-info">
+            <h2>EDM Fest</h2>
+            <p class="location">📍 Goa Beach Arena</p>
+            <p class="time">🕒 Sun, Apr 21 · 6:30 PM</p>
+            <p class="price">₹1499</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 3 -->
+
+        <div class="ticket-card">
+          <img src="https://talkdecor.com/wp-content/uploads/2018/08/Wine-Cellar-Dining-Table.jpg" alt="jazz-wine">
+          <div class="ticket-info">
+            <h2>Jazz & Wine Night</h2>
+            <p class="location">📍 Mumbai Jazz Club</p>
+            <p class="time">🕒 Fri, Apr 26 · 8:00 PM</p>
+            <p class="price">₹850</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 4 -->
+        <div class="ticket-card">
+          <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab" alt="open mic">
+          <div class="ticket-info">
+            <h2>Open Mic & Indie</h2>
+            <p class="location">📍 Chandigarh Lounge</p>
+            <p class="time">🕒 Sat, Apr 27 · 5:30 PM</p>
+            <p class="price">Free Entry</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+
+          </div>
+        </div>
+
+        <!-- ticket 5 -->
+        <div class="ticket-card">
+          <img
+            src="https://cdn.vox-cdn.com/thumbor/045YI3GCi6UkuFGgzRwAiJBDDKg=/0x223:2356x1548/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/46581900/RockBand4-KeyArt.0.0.jpg"
+            alt="rock concert">
+          <div class="ticket-info">
+            <h2>Rock On Stage</h2>
+            <p class="location">📍 Bangalore Stadium</p>
+            <p class="time">🕒 Sun, Apr 28 · 6:00 PM</p>
+            <p class="price">₹1200</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 6 -->
+        <div class="ticket-card">
+          <img src="https://singersroom.com/wp-content/uploads/2023/07/15-Pop-Music-Songs.jpg" alt="pop music concert">
+          <div class="ticket-info">
+            <h2>Pop Music Madness</h2>
+            <p class="location">📍 Pune Arena</p>
+            <p class="time">🕒 Mon, Apr 30 · 8:30 PM</p>
+            <p class="price">₹1100</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 7 -->
+        <div class="ticket-card">
+          <img src="https://3.bp.blogspot.com/-lcX6vd7RbDw/USREf8E2xDI/AAAAAAAAO3Y/Yxn0UqzuAOk/s1600/BCN+16.jpg"
+            alt="classical concert">
+          <div class="ticket-info">
+            <h2>Classical Night</h2>
+            <p class="location">📍 Delhi Opera House</p>
+            <p class="time">🕒 Thu, May 2 · 7:00 PM</p>
+            <p class="price">₹1500</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 8 -->
+        <div class="ticket-card">
+          <img src="https://treescoffee.com/wp-content/uploads/2019/09/Janis-1-1024x683.jpg" alt="soul music">
+          <div class="ticket-info">
+            <h2>Soul & Blues Jam</h2>
+            <p class="location">📍 Chennai Music Hall</p>
+            <p class="time">🕒 Fri, May 4 · 9:00 PM</p>
+            <p class="price">₹950</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 9 -->
+        <div class="ticket-card">
+          <img src="https://austin.culturemap.com/media-library/art-music-nights.jpg?id=31496859&width=1200&height=600"
+            alt="hip-hop concert">
+          <div class="ticket-info">
+            <h2>Hip-Hop Extravaganza</h2>
+            <p class="location">📍 Mumbai Club</p>
+            <p class="time">🕒 Sat, May 5 · 10:00 PM</p>
+            <p class="price">₹1300</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 10 -->
+        <div class="ticket-card">
+          <img
+            src="https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/sites/7/2016/08/230816_DJPexels-BollywoodDancing.jpg?w=1200&h=628&fill=blur&fit=fill"
+            alt="reggae concert">
+          <div class="ticket-info">
+            <h2>Reggae Vibes</h2>
+            <p class="location">📍 Goa Party Beach</p>
+            <p class="time">🕒 Sun, May 7 · 7:00 PM</p>
+            <p class="price">₹900</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 11 -->
+        <div class="ticket-card">
+          <img
+            src="https://media.istockphoto.com/vectors/music-night-vector-id157396795?k=6&m=157396795&s=170667a&w=0&h=j_JxtalndPEC5_e-GZRvn7wOybaaQ_lghZhi17RyrOo="
+            alt="indie music">
+          <div class="ticket-info">
+            <h2>Indie Music Fest</h2>
+            <p class="location">📍 Bangalore Garden</p>
+            <p class="time">🕒 Mon, May 9 · 5:00 PM</p>
+            <p class="price">₹950</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>
+
+        <!-- ticket 12 -->
+        <div class="ticket-card">
+          <img src="https://www.visitliptov.sk/wp-content/uploads/2022/07/street-music-night4-1-scaled.jpg"
+            alt="techno music">
+          <div class="ticket-info">
+            <h2>Techno Wave</h2>
+            <p class="location">📍 Pune Industrial Area</p>
+            <p class="time">🕒 Fri, May 11 · 9:30 PM</p>
+            <p class="price">₹1000</p>
+            <a href="#" class="btn btn-primary">Buy Now</a>
+          </div>
+        </div>        
+      </div>
+
+    </main>
+  </div>
+  <audio autoplay loop hidden>
+    <source src="{% static 'audio/audio1.mp3' %}" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+
+</html>

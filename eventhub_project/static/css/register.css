@@ -1,0 +1,136 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top left, #A1D6E2, #F1F1F2);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.blob1, .blob2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.6;
+    z-index: 0;
+}
+
+.blob1 {
+    width: 400px;
+    height: 400px;
+    background: #1995AD;
+    top: -100px;
+    left: -100px;
+}
+
+.blob2 {
+    width: 500px;
+    height: 500px;
+    background: #A1D6E2;
+    bottom: -120px;
+    right: -120px;
+}
+.home-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    color: #1995AD;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.home-icon:hover {
+    transform: scale(1.1);
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    color: #1995AD;
+  }
+
+h1.text-center {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 40px;
+    font-size: 28px;
+}
+
+.container1 {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.mb-3 {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+textarea,
+select {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #dcdcdc;
+    background: #fff;
+    font-size: 14px;
+    transition: border 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #1995AD;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.btn {
+    grid-column: span 2;
+    padding: 14px 24px;
+    border-radius: 12px;
+    background: linear-gradient(to right, #1995AD, #A1D6E2);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+p.mt-3 {
+    grid-column: span 2;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}

@@ -1,0 +1,205 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hobby Events - EventHub</title>
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">🎫 EventHub</div>
+            <nav class="nav">
+                <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+                <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+                <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+                <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+                <a href="{% url 'bookings:food' %}">🍴 Food</a>
+                <a href="{% url 'bookings:business' %}">👔 Business</a>
+                <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+                <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+                <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+                <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h1 class="page-title">🎮 Hobby Tickets</h1>
+            <div class="tickets">
+                <!-- Dynamically Added Tickets -->
+                {% for ticket in tickets %}
+                <div class="ticket-card">
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}">
+                    <div class="ticket-info">
+                        <h2>{{ ticket.name }}</h2>
+                        <p class="location">📍 {{ ticket.location }}</p>
+                        <p class="time">🕒 {{ ticket.time }}</p>
+                        <p class="price">{{ ticket.price }}</p>
+                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Buy Now</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="font-size: 18px; color: #666;">No dynamic tickets added yet.</p>
+                {% endfor %}
+           
+            <!-- Event 1 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.VDgpNZ-hPW7Q2xozvWTxbwHaE8?rs=1&pid=ImgDetMain"
+                    alt="photography walk">
+                <div class="ticket-info">
+                    <h2>Photography Walk</h2>
+                    <p class="location">📍 Mumbai Marine Drive</p>
+                    <p class="time">🕒 Apr 20 · 7:00 AM</p>
+                    <p class="price">Free</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 2 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.PrTfDZpA00PEvRA0nhaa9gHaFj?rs=1&pid=ImgDetMain"
+                    alt="gardening workshop">
+                <div class="ticket-info">
+                    <h2>Urban Gardening</h2>
+                    <p class="location">📍 Hyderabad Garden Hub</p>
+                    <p class="time">🕒 Apr 22 · 10:00 AM</p>
+                    <p class="price">₹250</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+
+                </div>
+            </div>
+            <!-- Event 3 -->
+            <div class="ticket-card">
+                <img src="https://ik.imagekit.io/2xkwa8s1i/img/WPTGSWHIS48S1/WPTGSWHIS48S1_1a.jpg?tr=w-640"
+                    alt="painting class">
+                <div class="ticket-info">
+                    <h2>Watercolor Painting</h2>
+                    <p class="location">📍 Pune Art Studio</p>
+                    <p class="time">🕒 Apr 25 · 2:00 PM</p>
+                    <p class="price">₹500</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 4 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.W-mZps5DqiB9UpvKNEYxGQHaLH?w=186&h=279&c=7&r=0&o=5&dpr=2.2&pid=1.7"
+                    alt="cooking class">
+                <div class="ticket-info">
+                    <h2>Cooking for Beginners</h2>
+                    <p class="location">📍 Delhi Cooking Studio</p>
+                    <p class="time">🕒 Apr 27 · 5:00 PM</p>
+                    <p class="price">₹700</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 5 -->
+            <div class="ticket-card">
+                <img src="https://cdn.shopify.com/s/files/1/0346/6838/0219/articles/handmade-ceramics-4360_1024x1024.jpg?v=1666822378"
+                    alt="pottery making">
+                <div class="ticket-info">
+                    <h2>Pottery Making</h2>
+                    <p class="location">📍 Bangalore Craft Hub</p>
+                    <p class="time">🕒 Apr 30 · 4:00 PM</p>
+                    <p class="price">₹600</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 6 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.kDJ1WSXDw78GumKAenGytgHaEK?rs=1&pid=ImgDetMain"
+                    alt="dance class">
+                <div class="ticket-info">
+                    <h2>Salsa Dance Class</h2>
+                    <p class="location">📍 Mumbai Dance Academy</p>
+                    <p class="time">🕒 May 2 · 7:30 PM</p>
+                    <p class="price">₹800</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 7 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.5T05h2IFk7oMxD5UQk_GbwHaE8?w=243&h=180&c=7&r=0&o=5&dpr=2.2&pid=1.7"
+                    alt="yoga class">
+                <div class="ticket-info">
+                    <h2>Morning Yoga</h2>
+                    <p class="location">📍 Pune Yoga Center</p>
+                    <p class="time">🕒 May 5 · 6:00 AM</p>
+                    <p class="price">₹300</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 8 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.yLlxmcGH-bJpgkaca0UsyQHaE8?rs=1&pid=ImgDetMain"
+                    alt="guitar class">
+                <div class="ticket-info">
+                    <h2>Learn Guitar</h2>
+                    <p class="location">📍 Bangalore Music School</p>
+                    <p class="time">🕒 May 8 · 4:30 PM</p>
+                    <p class="price">₹1000</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 9 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.kjnOkCTfAp-HGdRVR9KyeQAAAA?rs=1&pid=ImgDetMain"
+                    alt="knitting class">
+                <div class="ticket-info">
+                    <h2>Knitting for Beginners</h2>
+                    <p class="location">📍 Delhi Craft Center</p>
+                    <p class="time">🕒 May 10 · 3:00 PM</p>
+                    <p class="price">₹400</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 10 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/R.d5c8f5486a0a7b9a2b43dcb6e40a4953?rik=gnC2mFQFp49n%2bg&riu=http%3a%2f%2fnews.harvard.edu%2fwp-content%2fuploads%2f2019%2f04%2f042819_Chess_302_2500.jpg&ehk=QduOsy2QtRulg6Kg%2bnzjD8z92xtvciAZeZsRNLnzVV4%3d&risl=&pid=ImgRaw&r=0"
+                    alt="chess tournament">
+                <div class="ticket-info">
+                    <h2>Chess Tournament</h2>
+                    <p class="location">📍 Chennai Chess Club</p>
+                    <p class="time">🕒 May 12 · 11:00 AM</p>
+                    <p class="price">₹250</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 11 -->
+            <div class="ticket-card">
+                <img src="https://th.bing.com/th/id/OIP.4r9yDKzRLFYHZf8g0KC_pQHaEv?w=310&h=198&c=7&r=0&o=5&dpr=2.2&pid=1.7"
+                    alt="cycling tour">
+                <div class="ticket-info">
+                    <h2>Mountain Biking Tour</h2>
+                    <p class="location">📍 Shimla Bike Trails</p>
+                    <p class="time">🕒 May 15 · 6:00 AM</p>
+                    <p class="price">₹1200</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+            <!-- Event 12 -->
+            <div class="ticket-card">
+                <img src="https://c.pxhere.com/photos/a5/26/mountain_rock_hike_grass_hill-128958.jpg!d"
+                    alt="hiking adventure">
+                <div class="ticket-info">
+                    <h2>Hiking Adventure</h2>
+                    <p class="location">📍 Manali Hiking Trails</p>
+                    <p class="time">🕒 May 18 · 7:30 AM</p>
+                    <p class="price">₹1500</p>
+                    <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                </div>
+            </div>
+    </div>
+    </main>
+</div>
+</body>
+
+</html>

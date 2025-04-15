@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Ticket</title>
+    <link rel="stylesheet" href="{% static 'css/edit_ticket.css' %}">
+</head>
+<body>
+    <div class="edit-container">
+        <h1>Edit Ticket</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

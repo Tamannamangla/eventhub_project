@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outdoor Birthday Party</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+           
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            height: 400px;
+            background-image: url("{{ url_for('static', filename='images/restro.jpg') }}");
+
+            background-size: cover; 
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            /* position: relative; */
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        section h2 {
+            color: #1995AD;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        section p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .subsection {
+            margin-top: 40px;
+            display: block;
+            width: 100%;
+        }
+
+        .subsection .info-box {
+            width: 100%;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin-bottom: 30px;
+        }
+
+        .subsection .info-box:hover {
+            transform: scale(1.05);
+        }
+
+        .info-box img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-box img:hover {
+            transform: scale(1.1);
+        }
+
+        .info-box h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            color: #777;
+            font-size: 1.2em;
+        }
+
+        .learn-more-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4caf50;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 1em;
+        }
+
+        /* Carousel Style */
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .carousel-slide {
+            padding: 25px;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height:400px;
+            object-fit: cover;
+            padding: 17px;
+            border-radius: 8px;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .prev, .next {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 2em;
+            border-radius: 50%;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .party-activities {
+            background-image: url('party-activities-bg.jpg'); /* Replace with background image */
+            background-size: cover;
+            background-position: center;
+            padding: 60px 40px;
+            background-attachment: fixed;
+            color: white;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .party-activities::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Overlay for readability */
+            border-radius: 10px;
+        }
+
+        .party-activities .content {
+            position: relative;
+            z-index: 2;
+        }
+       
+
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 30px;
+            }
+
+            .info-box img {
+                height: 200px;
+            }
+
+            .info-box h3 {
+                font-size: 1.6em;
+            }
+
+            .learn-more-btn {
+                font-size: 1.1em;
+                padding: 12px 24px;
+            }
+
+            .carousel-image {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% extends 'contact.html' %}
+    {% block content1 %}
+    <a href="{{url_for('event')}}"> <i class="fa-solid fa-xmark fa-3x" style="color: #cc1e1e;"></i></a>
+
+    <header>
+        <div>
+            <h1 >Outdoor Birthday Party</h1>
+            <p>Celebrate in style with a fun outdoor birthday event!</p>
+        </div>
+    </header>
+
+    <section>
+        <h2>About the Event</h2>
+        <p>
+            An outdoor birthday party is a fantastic way to celebrate any special occasion. Whether you're hosting a family gathering or a lively party with friends, the open air adds a refreshing touch to your celebration. Imagine enjoying games, food, and laughter while surrounded by nature!
+        </p>
+        <p>
+            Perfect for any age group, outdoor parties allow for creative activities and games that will make your day unforgettable. From a relaxed picnic to an action-packed event with a bouncy castle, the possibilities are endless!
+        </p>
+    </section>
+
+    <section>
+        <h2>Party Themes & Ideas</h2>
+        <div class="subsection">
+            <div class="info-box">
+                <img src="{{ url_for('static', filename='images/picnic.jpg') }}" alt="Picnic Style Party">
+                <h3>Picnic Style Party</h3>
+                <p>Host a cozy picnic with blankets, lanterns, and delicious snacks in a scenic park.</p>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <div class="info-box">
+                <img src="{{ url_for('static', filename='images/outdoorgames.jpg') }}" alt="Picnic Style Party">
+                <h3>Outdoor Games</h3>
+                <p>Set up exciting games like tug-of-war, sack races, and a scavenger hunt for a fun-filled experience!</p>
+            </div>
+        </div>
+        
+        <div class="subsection">
+            <div class="info-box">
+                <img src="{{ url_for('static', filename='images/bbq.avif') }}" alt="BBQ Party">
+                <h3>BBQ & Grilling</h3>
+                <p>Enjoy a mouthwatering BBQ with grilled burgers, hot dogs, and veggie skewers for a delicious treat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <div class="carousel-container">
+        <div class="carousel-slide">
+            <img src="{{ url_for('static', filename='images/theme1.jpg') }}" alt="Party Theme 1" class="carousel-image">
+            <img src="{{ url_for('static', filename='images/theme2.jpg') }}" alt="Party Theme 2" class="carousel-image">
+            <img src="{{ url_for('static', filename='images/theme3.jpg') }}" alt="Party Theme 3" class="carousel-image">
+        </div>
+        <!-- <div class="carousel-controls">
+            <button class="prev" onclick="moveSlide(-1)">❮</button>
+            <button class="next" onclick="moveSlide(1)">❯</button>
+        </div> -->
+    </div>
+
+    <section class="party-activities">
+        <div class="content">
+            <h2>Party Activities</h2>
+            <div class="subsection">
+                <div class="info-box">
+                    <img src="{{ url_for('static', filename='images/fight.jpg') }}" alt="Water Balloon Fights">
+                    <h3>Water Balloon Fights</h3>
+                    <p>Cool off with an epic water balloon fight! Perfect for a summer birthday bash.</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="info-box">
+                    <img src="{{ url_for('static', filename='images/live.jpg') }}" alt="Live Music">
+                    <h3>Live Music & DJ</h3>
+                    <p>Hire a DJ or have a live band to bring energy to your outdoor party and keep everyone dancing!</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="info-box">
+                    <img src="{{ url_for('static', filename='images/bouncycastle.jpg') }}" alt="Bouncy Castle">
+                    <h3>Bouncy Castle</h3>
+                    <p>For the kids (and adults!), rent a bouncy castle for endless hours of fun!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  {% endblock %}
+
+</body>
+</html>

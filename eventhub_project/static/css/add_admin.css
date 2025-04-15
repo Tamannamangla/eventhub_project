@@ -1,0 +1,79 @@
+
+.heading {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.admin-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-form p {
+    margin-bottom: 15px;
+}
+
+.admin-form label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="email"],
+.admin-form input[type="password"],
+.admin-form input[type="date"],
+.admin-form select,
+.admin-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-submit,
+.btn-view {
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-right: 10px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-submit {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-submit:hover {
+    background-color: #218838;
+}
+
+.btn-view {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-view:hover {
+    background-color: #0056b3;
+}

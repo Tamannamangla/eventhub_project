@@ -1,0 +1,159 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Art Events - EventHub</title>
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">🎫 EventHub</div>
+            <nav class="nav">
+                <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+                <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+                <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+                <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+                <a href="{% url 'bookings:food' %}">🍴 Food</a>
+                <a href="{% url 'bookings:business' %}">👔 Business</a>
+                <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+                <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+                <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+                <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <h1 class="page-title">🎭 Art Tickets</h1>
+            <div class="tickets">
+                <!-- Dynamically Added Tickets -->
+                {% for ticket in tickets %}
+                <div class="ticket-card">
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}">
+                    <div class="ticket-info">
+                        <h2>{{ ticket.name }}</h2>
+                        <p class="location">📍 {{ ticket.location }}</p>
+                        <p class="time">🕒 {{ ticket.time }}</p>
+                        <p class="price">₹{{ ticket.price }}</p>
+                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Buy Now</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="font-size: 18px; color: #666;">No dynamic tickets added yet.</p>
+                {% endfor %}
+
+                <div class="ticket-card">
+                    <img src="https://canadianart.ca/wp-content/uploads/2014/10/Art-Toronto-View.jpg" alt="art exhibit">
+                    <div class="ticket-info">
+                        <h2>Modern Art Expo</h2>
+                        <p class="location">📍 Delhi Art Gallery</p>
+                        <p class="time">🕒 Fri, Apr 19 · 11:00 AM</p>
+                        <p class="price">₹499</p>
+                        <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <img src="https://img.artrabbit.com/events/open-33/images/HTTgSI3WeaMG/1500x1000/Open-33-9-Dec-22-005.jpg"
+                        alt="theatre">
+                    <div class="ticket-info">
+                        <h2>Stage Play - "Canvas"</h2>
+                        <p class="location">📍 Mumbai Theatre</p>
+                        <p class="time">🕒 Sat, Apr 20 · 7:00 PM</p>
+                        <p class="price">₹799</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <img src="https://artsartistsartwork.com/s3/2023/11/Mastering-Art-Events-A-Guide-to-Curating-Unforgettable-Exhibitions.jpg"
+                        alt="sculpture">
+                    <div class="ticket-info">
+                        <h2>Sculpture Showcase</h2>
+                        <p class="location">📍 Bangalore Art House</p>
+                        <p class="time">🕒 Sun, Apr 21 · 10:00 AM</p>
+                        <p class="price">₹350</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <img src="https://www.paintyourevent.com/wp-content/uploads/2017/09/5ed84b5b-5190-4ec7-beb6-48beb9714739.jpg"
+                        alt="open art night">
+                    <div class="ticket-info">
+                        <h2>Open Canvas Night</h2>
+                        <p class="location">📍 Pune Creative Studio</p>
+                        <p class="time">🕒 Fri, Apr 26 · 5:00 PM</p>
+                        <p class="price">Free Entry</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <img src="https://images.squarespace-cdn.com/content/v1/5b338c6bf93fd40cc613354d/1555081568035-XIAAUIY0D5DY1CN45ZZC/host-a-community-art-crawl.jpg"
+                        alt="calligraphy">
+                    <div class="ticket-info">
+                        <h2>Calligraphy Workshop</h2>
+                        <p class="location">📍 Jaipur Ink Lab</p>
+                        <p class="time">🕒 Sat, Apr 27 · 2:00 PM</p>
+                        <p class="price">₹299</p>
+                        <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4" alt="art therapy">
+                    <div class="ticket-info">
+                        <h2>Art Therapy Session</h2>
+                        <p class="location">📍 Hyderabad Wellness Hub</p>
+                        <p class="time">🕒 Sun, Apr 28 · 3:00 PM</p>
+                        <p class="price">₹450</p>
+                        <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <img src="https://www.holidify.com/images/cmsuploads/compressed/Gardiner_Art_Gallery_20210304081403.JPG"
+                        alt="craft fair">
+                    <div class="ticket-info">
+                        <h2>Craft Fair Carnival</h2>
+                        <p class="location">📍 Chennai Culture Hall</p>
+                        <p class="time">🕒 Mon, Apr 29 · 11:30 AM</p>
+                        <p class="price">₹399</p>
+                        <button type="submit" class="btn btn-primary"  onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="ticket-card">
+                    <img src="https://images.prestigeonline.com/wp-content/uploads/2020/01/07165906/London-art-fair-1.jpg"
+                        alt="gallery night">
+                    <div class="ticket-info">
+                        <h2>Gallery Night Walk</h2>
+                        <p class="location">📍 Kolkata Fine Arts</p>
+                        <p class="time">🕒 Tue, Apr 30 · 6:00 PM</p>
+                        <p class="price">₹600</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy Now</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+</body>
+
+</html>

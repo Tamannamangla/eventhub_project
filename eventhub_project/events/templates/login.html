@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left">
+            <form method="POST">
+                {% csrf_token %}
+                <a href="/" class="close-icon1" title="Back to Home">
+                    <i class="fas fa-xmark"></i>
+                </a>
+
+                <h1>Welcome Back</h1>
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+                <button>
+                    <img src="https://img.icons8.com/color/16/000000/google-logo.png"
+                        style="margin-right: 10px; vertical-align: middle;" /> Log in with Google
+                </button>
+
+                <p style="text-align:center; margin: 15px 0; color: #aaa;">OR LOGIN WITH EMAIL</p>
+
+                <input type="text" placeholder="You Email" name="email" id="email">
+
+                <input type="password" placeholder="You Password" name="password" id="password">
+
+                <select name="role" class="form-control" required>
+                    <option value="" disabled selected>Choose Role</option>
+                    <option value="user">User</option>
+                    <option value="event_manager">Event Manager</option>
+                    <option value="admin">Admin</option>
+                    <option value="super_admin">Super Admin</option>
+                </select>
+
+                <div class="options">
+                    <label><input type="checkbox"> Keep me logged in</label>
+                    <a href="#">Forgot password</a>
+                </div>
+                <button>Log in</button>
+            </form>
+            <div class="signup">
+                Don’t have an account yet? <a href="{% url 'register' %}">Sign up</a>
+            </div>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+</body>
+
+</html>

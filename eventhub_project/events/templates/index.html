@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHive - Landing Page</title>
+
+    <!-- Bootstrap & FontAwesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Swiper.js for Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+    <!-- Custom CSS -->
+</head>
+
+<body>
+
+
+    <!-- 🌟 Navbar Section -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{%url 'index'%}">🎉 EventHive</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'bookings:index2' %}">
+                            <i class="fas fa-ticket"></i> 🎟️ Tickets
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'feedback' %}">
+                            <i class="fas fa-envelope"></i> Feedback
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">
+                            <i class="fa-solid fa-comment"></i> About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}?next={% url 'home' %}">
+                            <i class="fa-solid fa-user"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">
+                            <i class="fa-solid fa-right-to-bracket"></i> Signup
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- 🎆 Home Section-->
+    <section class="home">
+        <div class="container1">
+            <h1>🎊 Welcome to <span>EventHive</span></h1>
+            <h3> Your one-stop destination for discovering and booking amazing events!</h3>
+            <a href="{%url 'register'%}" class="btn btn-primary">Start Your Journey</a>
+
+            <div class="bubbles">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="countdown-section">
+        <h2>⏳ Upcoming Mega Event: Tech Summit 2025</h2>
+        <div id="event-countdown"></div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us" id="why-choose-us">
+        <div class="container">
+            <h2>Why Choose Us? ✨</h2>
+            <div class="row">
+                <div class="col-md-4 feature">
+                    <img src="../static/images/WhychooseUs4.webp" alt="" height="300px" width="350px">
+                    <div class="h3_i">
+                        <i class="fas fa-calendar-check fa-2x"></i>
+                        <h3>Verified Events</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 feature">
+                    <img src="../static/images/WhyChooseUs7.webp" alt="" height="300px" width="350px">
+                    <div class="h3_i">
+                        <i class="fas fa-users fa-2x"></i>
+                        <h3>Best Community</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 feature">
+                    <img src="../static/images/WhyChooseUs5.webp" alt="" height="300px" width="350px">
+                    <div class="h3_i"> <i class="fas fa-star fa-2x"></i>
+                        <h3>Top Ratings</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frequently asked questions -->
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="accordion" id="faqAccordion">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                        How do I book an event?
+                    </button>
+                </h2>
+                <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">You can book an event through our website by selecting the event and
+                        clicking on the "Book Now" button.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                        What payment methods do you accept?
+                    </button>
+                </h2>
+                <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">We accept credit/debit cards, UPI, PayPal, and net banking.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                        Can I cancel my booking?
+                    </button>
+                </h2>
+                <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, cancellations are allowed up to 48 hours before the event.
+                        Cancellation charges may apply.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                        Do I receive a refund for a canceled event?
+                    </button>
+                </h2>
+                <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Refund policies vary by event. Please check the event details or contact
+                        our support team.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q5">
+                        Are group discounts available?
+                    </button>
+                </h2>
+                <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, we offer special discounts for group bookings. Contact us for more
+                        details.</div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q6">
+                        Can I change the attendee details after booking?
+                    </button>
+                </h2>
+                <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Yes, you can modify attendee details through your account dashboard
+                        before the event starts.</div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q7">
+                        How do I know if an event is sold out?
+                    </button>
+                </h2>
+                <div id="q7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Our website will show a "Sold Out" label on events that are no longer
+                        available for booking.</div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q8">
+                        Do I need to bring a printed ticket to the event?
+                    </button>
+                </h2>
+                <div id="q8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">No, a digital copy of your ticket on your phone is enough for entry.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2 class="section-title">🚀 Why Choose <span>EventHive?</span></h2>
+        <p class="section-subtitle">Your ultimate event planning companion – seamless, smart, and spectacular!</p>
+
+        <div class="features-container">
+
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Dynamic Event Management</h3>
+                <p>Create, edit, and manage events in just a few clicks. Whether it's a wedding, birthday, or corporate event, we've got you covered!</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Role-Based Access</h3>
+                <p>Seamlessly switch between Admin and User roles with a single login system, ensuring smooth access and control.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <i class="fas fa-image"></i>
+                <h3>Stunning Event Showcase</h3>
+                <p>Showcase your events with eye-catching images, details, and descriptions to captivate your audience.</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <i class="fas fa-list"></i>
+                <h3>Personalized Event Listings</h3>
+                <p>Browse events easily with categories like Birthdays, Weddings, Baby Showers, and more.</p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <i class="fas fa-tools"></i>
+                <h3>Admin Dashboard</h3>
+                <p>Organizers get full control over event creation, editing, and deletion with an intuitive dashboard.</p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <i class="fas fa-upload"></i>
+                <h3>Effortless Image Uploads</h3>
+                <p>Upload event images directly without the hassle of external links.</p>
+            </div>
+
+            <!-- Feature 7 -->
+            <div class="feature-card">
+                <i class="fas fa-comment-dots"></i>
+                <h3>Contact & Inquiry System</h3>
+                <p>Users can easily reach out for bookings or event details, ensuring smooth communication.</p>
+            </div>
+
+            <!-- Feature 8 -->
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Mobile-Friendly & Responsive</h3>
+                <p>EventHive is designed to look stunning across desktops, tablets, and smartphones.</p>
+            </div>
+
+            <!-- Feature 9 -->
+            <div class="feature-card">
+                <i class="fas fa-infinity"></i>
+                <h3>Smart Pagination & Infinite Scrolling</h3>
+                <p>Enjoy smooth browsing with fast-loading event feeds and endless scrolling.</p>
+            </div>
+
+            <!-- Feature 10 -->
+            <div class="feature-card">
+                <i class="fas fa-palette"></i>
+                <h3>Elegant UI/UX</h3>
+                <p>Engage users with a sleek, modern, and visually appealing interface with animations and smooth transitions.</p>
+            </div>
+
+        </div>
+    </section>
+    <!-- Team Members -->
+    <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/Screenshot 2025-02-15 at 11.43.41 PM.png" alt="Member 1">
+                        <p>
+                            <span>|</span> Tamanna - Leader
+                        </p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/gourvi.png" alt="Member 2">
+                        <p><span>|</span> Gourvi - Member 2</p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/komalpreet.png" alt="Member 3">
+                        <p><span>|</span> Komalpreet - Member 3</p>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-member">
+                        <img src="../static/images/tamanna.png" alt="Member 4">
+                        <p><span>|</span> Tamanna Choudhary - Member 4</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--news section-->
+    <section class="newsletter">
+        <section class="live-analytics">
+            <h2>📊 Live Event Insights</h2>
+            <p>Currently, <span id="event-live-users">10</span> users are browsing events.</p>
+        </section>
+        <div class="overlay">
+            <h1>Subscribe to Our Newsletter</h1>
+            <p>Stay updated with the latest events and offers.</p>
+            <form class="d-flex justify-content-center">
+                <input type="email" class="form-control me-2" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!--  Footer Section -->
+    
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="../static/images/logo1.png" class="footer-logo" alt="No"
+                    height="210px" width="200px">
+            </div>
+            <div class="footer-description">
+                <p>
+                    EventHive is your one-stop destination for seamless event planning. Whether it's a birthday,
+                    wedding, corporate gathering, or any special occasion, we bring your vision to life with precision
+                    and creativity.
+<br>
+                    With a passionate team of event professionals, we handle everything from venue selection and décor
+                    to entertainment and catering, ensuring a stress-free and memorable experience. 
+<br>
+                    At EventHive, we believe that every event tells a story, and we are here to make yours
+                    extraordinary. Let us take care of the details while you enjoy the moments that truly matter!
+
+                </p>
+            </div>
+            <div class="footer-contact">
+                <p><strong>Phone:</strong> +91 8168428500</p>
+                <p><strong>Fax:</strong> +1 916-875-2235</p>
+                <p><strong>Email:</strong> manglastamanna@gmail.com</p>
+                <p><strong>Website:</strong> <a href="index.html">www.EventHive.com</a></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h3>OUR SERVICES</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="#why-choose-us">Services</a></li>
+                        <li><a href="#why-choose-us">Features</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>QUICK LINK</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Hire An Expert</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>RESOURCES</h3>
+                    <ul>
+                        <li><a href="#">Knowledge Base</a></li>
+                        <li><a href="#">Hire An Expert</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>IMPORTANT LINK</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Condition</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- countdown-section js -->
+   
+
+    <!-- Swiper JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- css JavaScript -->
+    <script src="{% static 'js/main.js'%}"></script>
+
+
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

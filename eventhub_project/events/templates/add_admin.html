@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Add Admin Page {% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/add_admin.css' %}">{% endblock %}
+{% block content %}
+    
+    <h2 class="text-center heading" style="text-align: center;">Add Admin</h2>
+    <div class="container admin-form-container">
+        <form method="POST" enctype="multipart/form-data" class="admin-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-submit">Add Admin</button>
+            <a href="{% url 'list_admins' %}" class="btn-view">View All Admins</a>
+            <a href="{% url 'super_admin_dashboard' %}" class="btn btn-success">Cancel</a>
+        </form>
+    </div>
+    {% endblock %}

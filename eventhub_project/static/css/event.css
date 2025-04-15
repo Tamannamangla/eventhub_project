@@ -1,0 +1,287 @@
+/* Glassmorphism + Mobile-first Responsive Design
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --text-dark: #333;
+    --accent-pink: #ff9a9e;
+    --accent-blue: #A1D6E2;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    color: var(--text-dark);
+    padding: 1rem;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #1995AD, #A1D6E2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  h2 {
+    margin-top: 2rem;
+    font-size: 2rem;
+    color: #ff6b81;
+    text-align: center;
+  }
+  
+  .event-section {
+    margin-bottom: 3rem;
+  }
+  
+  .subsections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .subsection {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .subsection:hover {
+    transform: scale(1.02);
+  }
+  
+  .subsection-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .subsection-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .subsection-text {
+    text-align: center;
+  }
+  
+  .subsection-text h3 {
+    margin: 0.5rem 0;
+    color: #1995AD;
+  }
+  
+  .learn-more-btn {
+    background: #1995AD;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .learn-more-btn:hover {
+    background: #10768c;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    .subsection-content {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .subsection-text p {
+      font-size: 0.95rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .learn-more-btn {
+      width: 100%;
+    }
+  }
+   */
+   /* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fff0f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 2rem;
+  /* background: linear-gradient(135deg, #ff9a9e, #fad0c4); */
+  /* background: linear-gradient(135deg, #1995AD, #A1D6E2); */
+  /* background: linear-gradient(135deg, #A1D6E2, #F1F1F2); */
+  /* background-color:  #67B7CC; */
+  background-color: #7EC4D6;
+
+  
+
+  color: white;
+  /* border-bottom: 4px solid #ffccd5; */
+  /* border-bottom: 4px solid #d3ecf3; */
+  border-bottom: 4px solid #a7dbe9;
+
+
+  box-shadow: 0 4px 12px rgba(255, 105, 135, 0.2);
+}
+
+header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Section Styling */
+.event-section {
+  padding: 3rem 2rem;
+  background: #fff;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 3rem auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.event-section h2 {
+  text-align: center;
+  font-size: 2.4rem;
+  margin-bottom: 2.5rem;
+  /* color: #ff6b81; */
+  color: #6bb8ff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Subsections */
+.subsections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.subsection {
+  flex: 1 1 300px;
+  max-width: 350px;
+  background: linear-gradient(135deg, #f0faff, #dceeff);
+  /* background: linear-gradient(135deg, #e0f7fa, #b2ebf2); */
+  /* background: linear-gradient(135deg, #e3f2fd, #bbdefb); */
+
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(255, 105, 135, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subsection:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(255, 105, 135, 0.2);
+}
+
+.subsection-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.subsection-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #ffeef2;
+  border-radius: 18px 18px 0 0;
+}
+
+.subsection-text {
+  padding: 1rem;
+  text-align: center;
+}
+
+.subsection-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  /* color: #ff6f61; */
+  color: #61b0ff;
+
+}
+
+.subsection-text p {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 0.3rem 0;
+}
+
+/* Button */
+.learn-more-btn {
+  margin-top: 1rem;
+  /* background: linear-gradient(135deg, #ff6b81, #ff9a9e); */
+  background: linear-gradient(135deg, #61b0ff, #a1d6ff);
+
+
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 30px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.learn-more-btn:hover {
+  background: linear-gradient(135deg, #e0556e, #ff7a8b);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .subsections {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .event-section {
+      padding: 2rem 1rem;
+  }
+
+  header h1 {
+      font-size: 2rem;
+  }
+
+  .event-section h2 {
+      font-size: 2rem;
+  }
+}

@@ -1,0 +1,224 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Business Events - EventHub</title>
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">🎫 EventHub</div>
+            <nav class="nav">
+                <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+                <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+                <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+                <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+                <a href="{% url 'bookings:food' %}">🍴 Food</a>
+                <a href="{% url 'bookings:business' %}">👔 Business</a>
+                <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+                <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+                <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+                <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <h1 class="page-title">👔 Business Tickets</h1>
+            <div class="tickets">
+                <!-- Dynamically Added Tickets -->
+                {% for ticket in tickets %}
+                <div class="ticket-card">
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}">
+                    <div class="ticket-info">
+                        <h2>{{ ticket.name }}</h2>
+                        <p class="location">📍 {{ ticket.location }}</p>
+                        <p class="time">🕒 {{ ticket.time }}</p>
+                        <p class="price">{{ ticket.price }}</p>
+                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Buy Now</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="font-size: 18px; color: #666;">No dynamic tickets added yet.</p>
+                {% endfor %}
+
+                <!-- ticket 1 -->
+                <div class="ticket-card">
+                    <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg"
+                        alt="startup meet">
+                    <div class="ticket-info">
+                        <h2>Startup Pitch Meet</h2>
+                        <p class="location">📍 Delhi Incubator Hub</p>
+                        <p class="time">🕒 Apr 23 · 4:00 PM</p>
+                        <p class="price">₹1200</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 2 -->
+                <div class="ticket-card">
+                    <img src="https://images.unsplash.com/photo-1560264280-88b68371db39" alt="marketing seminar">
+                    <div class="ticket-info">
+                        <h2>Marketing 101 Seminar</h2>
+                        <p class="location">📍 Bangalore Biz Arena</p>
+                        <p class="time">🕒 Apr 25 · 2:00 PM</p>
+                        <p class="price">₹650</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 3 -->
+                <div class="ticket-card">
+                    <img src="https://mikeandjennphotography.com/wp-content/uploads/2019/08/Business-tickets-Photographer-home.jpg"
+                        alt="startup meet">
+                    <div class="ticket-info">
+                        <h2>Networking for Entrepreneurs</h2>
+                        <p class="location">📍 Mumbai Business Center</p>
+                        <p class="time">🕒 Apr 28 · 6:00 PM</p>
+                        <p class="price">₹850</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 4 -->
+                <div class="ticket-card">
+                    <img src="https://agcdn-1d97e.kxcdn.com/wp-content/uploads/2022/07/alphagamma-business-events-2022-entrepreneurship.jpeg"
+                        alt="marketing seminar">
+                    <div class="ticket-info">
+                        <h2>Leadership Bootcamp</h2>
+                        <p class="location">📍 Pune Corporate Hub</p>
+                        <p class="time">🕒 May 1 · 10:00 AM</p>
+                        <p class="price">₹999</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 5 -->
+                <div class="ticket-card">
+                    <img src="https://media.istockphoto.com/id/918958976/photo/business-event.jpg?s=1024x1024&w=is&k=20&c=7LnPdjss3rnEi4Jsr-pW4Azz7F2JiFDTid7Ddd-UBFo="
+                        alt="startup meet">
+                    <div class="ticket-info">
+                        <h2>Finance for Startups</h2>
+                        <p class="location">📍 Delhi Incubator Hub</p>
+                        <p class="time">🕒 May 5 · 3:00 PM</p>
+                        <p class="price">₹1100</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 6 -->
+                <div class="ticket-card">
+                    <img src="https://images.unsplash.com/photo-1560264280-88b68371db39" alt="marketing seminar">
+                    <div class="ticket-info">
+                        <h2>Investor Meet</h2>
+                        <p class="location">📍 Bangalore Biz Arena</p>
+                        <p class="time">🕒 May 8 · 5:00 PM</p>
+                        <p class="price">₹1300</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 7 -->
+                <div class="ticket-card">
+                    <img src="https://beamexperience.life/wp-content/uploads/2022/03/DSC00696.jpg" alt="startup meet">
+                    <div class="ticket-info">
+                        <h2>Business Strategy Workshop</h2>
+                        <p class="location">📍 Mumbai Business Center</p>
+                        <p class="time">🕒 May 12 · 11:00 AM</p>
+                        <p class="price">₹1600</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 8 -->
+                <div class="ticket-card">
+                    <img src="https://i.pinimg.com/originals/48/89/38/488938d6eec996de2365b072357aac16.jpg"
+                        alt="marketing">
+                    <div class="ticket-info">
+                        <h2>Digital Marketing Masterclass</h2>
+                        <p class="location">📍 Pune Corporate Hub</p>
+                        <p class="time">🕒 May 15 · 2:00 PM</p>
+                        <p class="price">₹900</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 9 -->
+                <div class="ticket-card">
+                    <img src="https://images.unsplash.com/photo-1560264280-88b68371db39" alt="startup meet">
+                    <div class="ticket-info">
+                        <h2>Startup Growth Hacking</h2>
+                        <p class="location">📍 Delhi Incubator Hub</p>
+                        <p class="time">🕒 May 18 · 4:30 PM</p>
+                        <p class="price">₹1400</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 10 -->
+                <div class="ticket-card">
+                    <img src="https://www.huone.events/app/uploads/2019/12/business-meeting-and-event-trends-2020.jpg"
+                        alt="marketing seminar">
+                    <div class="ticket-info">
+                        <h2>Pitch Perfect</h2>
+                        <p class="location">📍 Bangalore Biz Arena</p>
+                        <p class="time">🕒 May 20 · 1:00 PM</p>
+                        <p class="price">₹700</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 11 -->
+                <div class="ticket-card">
+                    <img src="https://d33wubrfki0l68.cloudfront.net/1906abe7012b735bbf2faef5c5f4b33a0ee2bc6e/065d9/static/267bfd57668b625c7a61fd375a07870e/e5166/stickerstars-business-event-planen.jpg"
+                        alt="startup meet">
+                    <div class="ticket-info">
+                        <h2>Women Entrepreneurs Summit</h2>
+                        <p class="location">📍 Mumbai Business Center</p>
+                        <p class="time">🕒 May 22 · 9:00 AM</p>
+                        <p class="price">₹1600</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+
+                <!-- ticket 12 -->
+                <div class="ticket-card">
+                    <img src="https://images.unsplash.com/photo-1560264280-88b68371db39" alt="marketing seminar">
+                    <div class="ticket-info">
+                        <h2>Tech Innovations in Business</h2>
+                        <p class="location">📍 Pune Corporate Hub</p>
+                        <p class="time">🕒 May 25 · 11:30 AM</p>
+                        <p class="price">₹1300</p>
+                        <button type="submit" class="btn btn-primary" onclick="alert('Booked Successfully!...')">Buy
+                            Now</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

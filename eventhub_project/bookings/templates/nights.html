@@ -1,0 +1,192 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nightlife Events - EventHub</title>
+    <link rel="stylesheet" href="{% static 'css/music.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="layout">
+
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">🎫 EventHub</div>
+            <nav class="nav">
+                <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+                <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+                <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+                <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+                <a href="{% url 'bookings:food' %}">🍴 Food</a>
+                <a href="{% url 'bookings:business' %}">👔 Business</a>
+                <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+                <a href="{% url 'bookings:nightlife' %}" class="active">🌃 Nightlife</a>
+                <a href="{% url 'bookings:holidays' %}" class="active">🎉 Holidays</a>
+                <a href="{% url 'bookings:dates' %}" class="active">💖 Dates</a>
+        
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <h1 class="page-title">🌃 Nightlife Tickets</h1>
+
+            <div class="tickets">
+                <!-- Dynamically Added Tickets -->
+                {% for ticket in tickets %}
+                <div class="ticket-card">
+                    <img src="{{ ticket.image.url }}" alt="{{ ticket.name }}">
+                    <div class="ticket-info">
+                        <h2>{{ ticket.name }}</h2>
+                        <p class="location">📍 {{ ticket.location }}</p>
+                        <p class="time">🕒 {{ ticket.time }}</p>
+                        <p class="price">{{ ticket.price }}</p>
+                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Buy Now</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="font-size: 18px; color: #666;">No dynamic tickets added yet.</p>
+                {% endfor %}
+          
+
+            <!-- Example Nightlife Events -->
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" alt="nightclub">
+                <div class="ticket-info">
+                    <h2>Midnight Neon Party</h2>
+                    <p class="location">📍 Mumbai Nightclub</p>
+                    <p class="time">🕒 Sat, Apr 20 · 10:00 PM</p>
+                    <p class="price">₹1200</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1551739440-3657ae66b622" alt="rooftop party">
+                <div class="ticket-info">
+                    <h2>Rooftop Sundown</h2>
+                    <p class="location">📍 Bangalore Sky Lounge</p>
+                    <p class="time">🕒 Fri, Apr 21 · 6:00 PM</p>
+                    <p class="price">₹1000</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2" alt="dance club">
+                <div class="ticket-info">
+                    <h2>House Beats Night</h2>
+                    <p class="location">📍 Goa Underground Club</p>
+                    <p class="time">🕒 Sat, Apr 22 · 9:00 PM</p>
+                    <p class="price">₹1300</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1535909339361-9d86d3f20766" alt="live bar">
+                <div class="ticket-info">
+                    <h2>Live Bar Sessions</h2>
+                    <p class="location">📍 Delhi Taproom</p>
+                    <p class="time">🕒 Sun, Apr 23 · 8:00 PM</p>
+                    <p class="price">₹750</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1564767609342-620cb19b2357" alt="latin night">
+                <div class="ticket-info">
+                    <h2>Latin Dance Fever</h2>
+                    <p class="location">📍 Hyderabad Club Rio</p>
+                    <p class="time">🕒 Fri, Apr 28 · 9:30 PM</p>
+                    <p class="price">₹950</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1580567850935-0b338063b9d9" alt="karaoke night">
+                <div class="ticket-info">
+                    <h2>Karaoke Kings & Queens</h2>
+                    <p class="location">📍 Pune Karaoke Bar</p>
+                    <p class="time">🕒 Sat, Apr 29 · 8:00 PM</p>
+                    <p class="price">₹600</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1496346651079-6ca5cb67f42f" alt="tech night">
+                <div class="ticket-info">
+                    <h2>Techno Tunnel</h2>
+                    <p class="location">📍 Goa Tech Arena</p>
+                    <p class="time">🕒 Sun, Apr 30 · 10:00 PM</p>
+                    <p class="price">₹1400</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd53" alt="comedy bar">
+                <div class="ticket-info">
+                    <h2>Laughs & Lager</h2>
+                    <p class="location">📍 Mumbai Comedy Bar</p>
+                    <p class="time">🕒 Thu, May 2 · 7:30 PM</p>
+                    <p class="price">₹500</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1580460290497-1c0c5c6e646c" alt="bollywood night">
+                <div class="ticket-info">
+                    <h2>Bollywood Nights</h2>
+                    <p class="location">📍 Delhi Bollywood Club</p>
+                    <p class="time">🕒 Fri, May 3 · 9:00 PM</p>
+                    <p class="price">₹850</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1551739440-5e3e0b85be5b" alt="silent disco">
+                <div class="ticket-info">
+                    <h2>Silent Disco</h2>
+                    <p class="location">📍 Bangalore Eco Park</p>
+                    <p class="time">🕒 Sat, May 4 · 10:30 PM</p>
+                    <p class="price">₹900</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1549921296-3a6b69b99018" alt="bar crawl">
+                <div class="ticket-info">
+                    <h2>Downtown Bar Crawl</h2>
+                    <p class="location">📍 Pune City Center</p>
+                    <p class="time">🕒 Sun, May 5 · 6:00 PM</p>
+                    <p class="price">₹700</p>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <img src="https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5" alt="after party">
+                <div class="ticket-info">
+                    <h2>After Hours Bash</h2>
+                    <p class="location">📍 Chennai After Lounge</p>
+                    <p class="time">🕒 Mon, May 6 · 12:00 AM</p>
+                    <p class="price">₹1250</p>
+                </div>
+            </div>
+
+    </div>
+    </main>
+</div>
+<audio autoplay loop hidden>
+    <source src="{% static 'audio/audio1.mp3' %}" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  
+</body>
+
+</html>

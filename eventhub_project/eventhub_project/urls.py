@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('events.urls')),      # Main site (Flask-migrated app)
-    path('accounts/', include('bookings.urls')),  # Auth or new feature
+    path('bookings/', include('bookings.urls', namespace='bookings')),  # Auth or new feature
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}View Event{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="extra"></div>
+    <h2 class="mt-4">View Event</h2>
+
+    <div class="mb-3">
+        <label class="form-label"><strong>Event Name:</strong></label>
+        <p class="form-control-plaintext">{{ event.name }}</p>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label"><strong>Category:</strong></label>
+        <p class="form-control-plaintext text-capitalize">{{ event.category }}</p>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label"><strong>Location:</strong></label>
+        <p class="form-control-plaintext">{{ event.location }}</p>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label"><strong>Date:</strong></label>
+        <p class="form-control-plaintext">{{ event.date }}</p>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label"><strong>Description:</strong></label>
+        <p class="form-control-plaintext">{{ event.description }}</p>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label"><strong>Image:</strong></label><br>
+        {% if event.image_url %}
+            <img src="{{ event.image_url }}" alt="Event Image" class="img-fluid" style="max-width: 400px;">
+        {% else %}
+            <p class="text-muted">No image provided.</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+</div>
+{% endblock %}

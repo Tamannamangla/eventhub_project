@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile | EventHive</title>
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="edit-profile-container">
+
+        <h2>Edit Your Profile</h2>
+        <hr>
+        <form method="POST" class="edit-form">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-left">
+                    <label for="id_name">Full Name</label>
+                    {{ form.name }}
+
+                    <label for="id_email">Email</label>
+                    {{ form.email }}
+
+                    <label for="id_phone">Phone</label>
+                    {{ form.phone }}
+
+                    <label for="id_dob">Date of Birth</label>
+                    {{ form.dob }}
+
+                    <label for="id_gender">Gender</label>
+                    {{ form.gender }}
+
+                    <label for="id_address">Address</label>
+                    {{ form.address }}
+                </div>
+
+                <div class="form-right">
+                    <label for="id_hobbies">Hobbies</label>
+                    {{ form.hobbies }}
+
+                    <label for="id_bio">Bio</label>
+                    {{ form.bio }}
+
+                    <label for="id_social_media">Social Media</label>
+                    {{ form.social_media }}
+
+                    <label for="id_notifications">Notifications</label>
+                    {{ form.notifications }}
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

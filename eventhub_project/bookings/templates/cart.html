@@ -1,0 +1,226 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - EventHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #FFF6E3;
+      color: #333;
+    }
+
+    .layout {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #CDC1FF;
+      color: #1b1b1b;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      height: 40px;
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #f70f96;
+    }
+
+    .nav a {
+      display: block;
+      color: #333;
+      text-decoration: none;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: background-color 0.3s, padding 0.3s;
+    }
+
+    .nav a:hover,
+    .nav .active {
+      background-color: #f973c1;
+      color: #222;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px 60px;
+      overflow-y: auto;
+    }
+
+    .cart-container {
+      background-color: #BFECFF;
+      padding: 30px;
+      border-radius: 15px;
+    }
+
+    .booking-item {
+      display: flex;
+      background-color: #FFCCEA;
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 10px;
+      gap: 20px;
+    }
+
+    .booking-item img {
+      width: 120px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .info {
+      flex-grow: 1;
+    }
+
+    .info h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .qty-controls {
+      margin-top: 10px;
+    }
+
+    .qty-controls form {
+      display: inline;
+    }
+
+    .qty-controls button {
+      background: #f05537;
+      color: white;
+      padding: 4px 10px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .total-box {
+      background-color: #CDC1FF;
+      padding: 15px;
+      font-weight: bold;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .address-box {
+      margin-top: 10px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .btn {
+      background-color: #f70f96;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      float: right;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- Sidebar Navbar -->
+    <aside class="sidebar">
+      <div class="logo">🎫 EventHub</div>
+      <nav class="nav">
+        <a href="{% url 'bookings:index2' %}">🏠 Home</a>
+        <a href="{% url 'bookings:dashboard3' %}">📊 Dashboard</a>
+        <a href="{% url 'bookings:music' %}" class="active">🎵 Music</a>
+        <a href="{% url 'bookings:art' %}">🎭 Arts</a>
+        <a href="{% url 'bookings:food' %}">🍴 Food</a>
+        <a href="{% url 'bookings:business' %}">👔 Business</a>
+        <a href="{% url 'bookings:hobbies' %}">🎮 Hobbies</a>
+        <a href="{% url 'bookings:nightlife' %}">🌃 Nightlife</a>
+        <a href="{% url 'bookings:holidays' %}">🎉 Holidays</a>
+        <a href="{% url 'bookings:dates' %}">💖 Dates</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <div class="cart-container">
+        <h2>Your Cart</h2>
+
+        {% if bookings %}
+        {% for booking in bookings %}
+        <div class="booking-item">
+          <img src="{{ booking.ticket.image.url }}" alt="{{ booking.ticket.name }}">
+          <div class="info">
+            <h3>{{ booking.ticket.name }}</h3>
+            <p>Price: ₹{{ booking.ticket.price }}</p>
+            <p>Booked on: {{ booking.booking_date|date:"d M, Y" }}</p>
+            <div class="qty-controls">
+              <form method="post">{% csrf_token %}
+                <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                <input type="hidden" name="action" value="decrease">
+                <button>-</button>
+              </form>
+              Quantity: {{ booking.quantity }}
+              <form method="post" style="display:inline;">{% csrf_token %}
+                <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                <input type="hidden" name="action" value="increase">
+                <button>+</button>
+              </form>
+              <form method="post" style="display:inline;">{% csrf_token %}
+                <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                <input type="hidden" name="action" value="delete">
+                <button style="background: crimson;">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="total-box">
+          Total: ₹{{ total }}
+        </div>
+
+        <div class="address-box">
+          <strong>Shipping Address:</strong> {{ address }}
+          <br>
+        </div>
+        <div>
+          <a href="{% url 'bookings:payment' %}" class="btn btn-success" style="text-decoration: none;">Proceed to Payment</a>
+          {% else %}
+        <p>No bookings yet.</p>
+        {% endif %}
+        </div>
+        <br><br><br>
+        
+        
+      </div>
+    </main>
+
+  </div>
+</body>
+
+</html>
