@@ -4,11 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import TicketForm
 from .models import Ticket, Booking
-from django.http import HttpResponse
-
 from collections import defaultdict
-# Create your views here.
 
+# Create your views here.
 
 
 def index2(request):
@@ -20,6 +18,7 @@ def dashboard3(request):
     if request.method == 'POST' and form.is_valid():
         ticket = form.save(commit=False)
         ticket.user = request.user
+        ticket.available_quantity = ticket.total_tickets
         ticket.save()
         return redirect('bookings:dashboard3')
 
@@ -29,21 +28,21 @@ def dashboard3(request):
     categorized_tickets = defaultdict(list)
     for ticket in tickets:
         categorized_tickets[ticket.category].append(ticket)
+        # ticket.booked = ticket.total_tickets - ticket.available_quantity
+        ticket.booked = sum(booking.quantity for booking in ticket.booking_set.all())
 
-    return render(request, 'dashboard3.html', {
-        'form': form,
-        'categorized_tickets': dict(categorized_tickets),
-    })
 
-# def all_tickets(request):
-#     all_tickets = Ticket.objects.all()
-#     categorized_tickets = defaultdict(list)
-#     for ticket in all_tickets:
-#         categorized_tickets[ticket.category].append(ticket)
+    return render(request, 'dashboard3.html', {'form': form,'categorized_tickets': dict(categorized_tickets),})
+
+def all_tickets(request):
+    all_tickets = Ticket.objects.all()
+    categorized_tickets = defaultdict(list)
+    for ticket in all_tickets:
+        categorized_tickets[ticket.category].append(ticket)
     
-#     return render(request, 'dashboard3.html', {
-#         'categorized_tickets': categorized_tickets
-#     })
+    return render(request, 'dashboard3.html', {
+        'categorized_tickets': categorized_tickets
+    })
 
 def edit_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, pk=ticket_id)
@@ -97,45 +96,46 @@ def dates(request):
 @login_required
 def buy_ticket(request, ticket_id):
     ticket = Ticket.objects.get(id=ticket_id)
-
-    # Check if already booked
     booking = Booking.objects.filter(user=request.user, ticket=ticket).first()
 
     if request.method == 'POST':
+        quantity_requested = 1
         if booking:
-            # Already exists → increase quantity
+            quantity_requested = booking.quantity + 1
+
+        if quantity_requested > ticket.available_tickets():
+            messages.error(request, f"Only {ticket.available_tickets()} tickets are left. Cannot book more.")
+            return redirect('bookings:view_cart')
+
+        if booking:
             booking.quantity += 1
             booking.save()
         else:
-            # Naya booking create karo
-            booking = Booking.objects.create(
-                user=request.user,
-                ticket=ticket,
-                quantity=1
-            )
+            Booking.objects.create(user=request.user, ticket=ticket, quantity=1)
 
-        return redirect('bookings:view_cart')  # ✅ Make sure 'view_cart' has bookings: namespace
+        return redirect('bookings:view_cart')
 
-    # For GET request: maybe show ticket details (if needed)
     return render(request, 'cart.html', {'ticket': ticket})
 
-from django.urls import reverse
 
 @login_required
 def view_cart(request):
     bookings = Booking.objects.filter(user=request.user)
     total = sum(float(b.ticket.price) * b.quantity for b in bookings)
 
-    # If updating quantity
     if request.method == 'POST':
         booking_id = request.POST.get('booking_id')
         action = request.POST.get('action')
 
         booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+        available = booking.ticket.available_tickets()
 
         if action == 'increase':
-            booking.quantity += 1
-            booking.save()
+            if booking.quantity + 1 > available:
+                messages.error(request, f"Only {available} tickets are left for '{booking.ticket.name}'.")
+            else:
+                booking.quantity += 1
+                booking.save()
         elif action == 'decrease' and booking.quantity > 1:
             booking.quantity -= 1
             booking.save()
@@ -147,8 +147,9 @@ def view_cart(request):
     return render(request, 'cart.html', {
         'bookings': bookings,
         'total': total,
-        'address': request.user.address  # from your CustomUser
+        'address': request.user.address
     })
+
 @login_required
 def payment_view(request):
     bookings = Booking.objects.filter(user=request.user)
@@ -158,3 +159,5 @@ def payment_view(request):
         'bookings': bookings,
         'total': total
     })
+
+

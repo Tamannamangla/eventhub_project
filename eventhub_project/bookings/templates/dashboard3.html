@@ -83,6 +83,7 @@
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+           
         }
 
         .form-card h2 {
@@ -116,10 +117,11 @@
 
         /* Ticket Image */
         .ticket-image {
-            flex: 1;
+            flex: 1.5;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            width: 70%;
         }
 
         .ticket-image img {
@@ -341,7 +343,7 @@
     <div class="dashboard-wrapper">
         <!-- Sidebar -->
         <div class="sidebar">
-            <h2>EventHub</h2>
+            <h2>EventHive</h2>
             <ul>
                 <ul>
                     <li><i class="icon">🏠</i> <a href="{% url 'bookings:index2' %}"
@@ -394,54 +396,57 @@
             <div class="category-box">
                 <h3>Ticketegories</h3>
                 <div class="category-buttons">
-                    <span class="cat-btn music">Music</span>
-                    <span class="cat-btn arts">Arts</span>
-                    <span class="cat-btn food">Food</span>
-                    <span class="cat-btn business">Business</span>
-                    <span class="cat-btn hobbies">Hobbies</span>
-                    <span class="cat-btn nightlife">Nightlife</span>
-                    <span class="cat-btn holidays">Holidays</span>
-                    <span class="cat-btn sports">Sports</span>
+                    <a href="#music" class="cat-btn music">Music</a>
+                    <a href="#art" class="cat-btn arts">Arts</a>
+                    <a href="#food" class="cat-btn food">Food</a>
+                    <a href="#business" class="cat-btn business">Business</a>
+                    <a href="#nightlife" class="cat-btn nightlife">Nightlife</a>
+                    <a href="#holidays" class="cat-btn holidays">Holidays</a>
+                    <a href="#dates" class="cat-btn sports">Dates</a>
                 </div>
             </div>
-        
-
-        <hr>
 
 
-        <section id="tickets-section" class="tickets-section fade-in-section">
-            <h2>Your Tickets</h2>
+            <hr>
 
-            {% if categorized_tickets %}
-            {% for category, ticket_list in categorized_tickets.items %}
-            <div class="tickets-section">
-                <h2>{{ category }}</h2>
-                <div class="ticket-grid">
-                    {% for ticket in ticket_list %}
-                    <div class="ticket-card">
-                        <img src="{{ ticket.image.url }}" alt="ticket image" style="height: 100px;" />
-                        <h3>{{ ticket.name }}</h3>
-                        <p>📍 {{ ticket.location }}</p>
-                        <p>🕒 {{ ticket.time }}</p>
-                        <p>💵 {{ ticket.price }}</p>
-                        <div class="actions">
-                            <a href="{% url 'bookings:delete_ticket' ticket.id %}" class="delete-btn"
-                                onclick="return confirm('Are you sure you want to delete this ticket?');">🗑️ Delete</a>
-                            <a href="{% url 'bookings:edit_ticket' ticket.id %}">Edit</a>
+
+            <section id="tickets-section" class="tickets-section fade-in-section">
+                <h2>Your Tickets</h2>
+
+                {% if categorized_tickets %}
+                {% for category, ticket_list in categorized_tickets.items %}
+                <div id="{{ category|slugify }}" class="tickets-section">
+                    <h2>{{ category }}</h2>
+                    <div class="ticket-grid">
+                        {% for ticket in ticket_list %}
+                        <div class="ticket-card">
+                            <img src="{{ ticket.image.url }}" alt="ticket image" style="height: 100px;" />
+                            <h3>{{ ticket.name }}</h3>
+                            <p>📍 {{ ticket.location }}</p>
+                            <p>🕒 {{ ticket.time }}</p>
+                            <p>💵 {{ ticket.price }}</p>
+                            <p>🎟️ Total Tickets: {{ ticket.total_tickets }}</p>
+                            <p>✅ Available: {{ ticket.available_tickets }}</p>
+                            <p>Booked Tickets: {{ ticket.booked }}</p>
+                            <div class="actions">
+                                <a href="{% url 'bookings:delete_ticket' ticket.id %}" class="delete-btn"
+                                    onclick="return confirm('Are you sure you want to delete this ticket?');">🗑️
+                                    Delete</a>
+                                <a href="{% url 'bookings:edit_ticket' ticket.id %}">Edit</a>
+                            </div>
                         </div>
+                        {% endfor %}
+
                     </div>
-                    {% endfor %}
-
                 </div>
-            </div>
-            {% endfor %}
-            {% else %}
-            <p>No tickets available yet.</p>
-            {% endif %}
+                {% endfor %}
+                {% else %}
+                <p>No tickets available yet.</p>
+                {% endif %}
 
 
 
-        </section>
+            </section>
         </div>
     </div>
 

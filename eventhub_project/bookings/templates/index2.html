@@ -89,31 +89,31 @@
       <div class="icon-circle">🎤</div>
       <p>Music</p>
     </a>
-    <a href="#" class="category">
+    <a href="{% url 'bookings:nightlife' %}" class="category">
       <div class="icon-circle">🪩</div>
       <p>Nightlife</p>
     </a>
-    <a href="#" class="category">
+    <a href="{% url 'bookings:art' %}" class="category">
       <div class="icon-circle">🎭</div>
       <p>Performing & Visual Arts</p>
     </a>
-    <a href="#" class="category">
+    <a href="{% url 'bookings:holidays' %}" class="category">
       <div class="icon-circle">📅</div>
       <p>Holidays</p>
     </a>
-    <a href="#" class="category">
+    <a href="{% url 'bookings:dates' %}" class="category">
       <div class="icon-circle">💖</div>
       <p>Dating</p>
     </a>
-    <a href="#" class="category">
+    <a href="{% url 'bookings:hobbies' %}" class="category">
       <div class="icon-circle">🎮</div>
       <p>Hobbies</p>
     </a>
-    <a href="#" class="category">
+    <a href="{% url 'bookings:business' %}" class="category">
       <div class="icon-circle">🧑‍💼</div>
       <p>Business</p>
     </a>
-    <a href="#" class="category">
+    <a href="{% url 'bookings:food' %}" class="category">
       <div class="icon-circle">🍹</div>
       <p>Food & Drink</p>
     </a>
@@ -143,72 +143,63 @@
       <!-- Repeatable event card -->
       <div class="event-card">
         <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
+        <h3>Birthday Parties</h3>
         <p>Ludhiana · April 25</p>
       </div>
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/a1.jpg' %}" alt="Event 1">
+        <h3>Live Acting</h3>
+        <p>Delhi · March 25</p>
       </div>
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/m6.jpg' %}" alt="Event 1">
+        <h3>Chorus Music</h3>
+        <p>Mumbai · June 12</p>
       </div>
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/m1.jpg' %}" alt="Event 1">
+        <h3>Evening Songs</h3>
+        <p>Banglore · July 23</p>
       </div>
 
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/m3.jpg' %}" alt="Event 1">
+        <h3>Musical Party</h3>
+        <p>Ludhiana · April 29</p>
       </div>
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/a2.jpg' %}" alt="Event 1">
+        <h3>Carnival</h3>
+        <p>Gurugram · August 2</p>
       </div>
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/m4.jpg' %}" alt="Event 1">
+        <h3>Band Night</h3>
+        <p>Delhi · October 4</p>
       </div>
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/a3.jpg' %}" alt="Event 1">
+        <h3>Dineer-Movie Night</h3>
+        <p>Hyderabad · October 10</p>
       </div>
       <div class="event-card">
-        <img src="{% static 'images/event1.jpg' %}" alt="Event 1">
-        <h3>Live EDM Night</h3>
-        <p>Ludhiana · April 25</p>
+        <img src="{% static 'images/m7.jpg' %}" alt="Event 1">
+        <h3>Beach Party</h3>
+        <p>Mumbai · June 14</p>
       </div>
     </div>
   </section>
   
-  <!-- <section class="photo-gallery reveal">
-    <h2>📸 Event Moments</h2>
-    <div class="gallery-grid">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="">     
-    </div>
-  </section> -->
 
   <!-- more images -->
 
   <section class="gallery-section from-left">
     <h2>📷 Event Gallery</h2>
     <div class="gallery-grid">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="Gallery Img">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="Gallery Img">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="Gallery Img">
-      <img src="https://www.mtievents.com/wp-content/uploads/2019/07/business-people-at-corporate-event.jpg" alt="Gallery Img">
+      <img src="{% static 'images/m2.jpg' %}" alt="Gallery Img">
+      <img src="{% static 'images/m3.jpg' %}" alt="Gallery Img">
+      <img src="{% static 'images/m5.jpg' %}" alt="Gallery Img">
+      <img src="{% static 'images/m6.jpg' %}" alt="Gallery Img">
     </div>
   </section>
   

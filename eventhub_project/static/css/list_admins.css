@@ -1,64 +1,104 @@
-   /* Admins Table Styling */
-
-   h2.text-center {
-    font-size: 2rem;
-    margin-top: 20px;
-    color: #343a40;
-    font-weight: 700;
-}
-
-.container1 {
-    margin-top: 40px;
+.admin-list-container {
     max-width: 95%;
-    overflow-x: auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+    margin: 40px auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
 }
 
-table {
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.btn-add {
+    padding: 10px 20px;
+    background-color: #CDC1FF;
+    color: #333;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add:hover {
+    background-color: #BFECFF;
+    transform: translateY(-3px);
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background-color: #fff6e3;
+    padding: 20px;
+    border: 1px solid #CDC1FF;
+}
+
+.admin-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.95rem;
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    min-width: 1000px;
 }
 
-thead {
-    background-color: #007bff;
-    color: white;
+.admin-table thead {
+    background-color: #CDC1FF;
+    color: #333;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 18px;
     text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
-th, td {
-    padding: 12px 15px;
-    text-align: center;
-    vertical-align: middle;
+.admin-table tr:hover {
+    background-color: #f0f9ff;
+    transition: background 0.3s ease-in-out;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+.btn-edit,
+.btn-delete {
+    text-decoration: none;
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    display: inline-block;
 }
 
-tbody tr:hover {
-    background-color: #e9ecef;
-    transition: background-color 0.3s ease;
+.btn-edit {
+    background-color: #fffac2;
+    color: #333;
 }
 
-th {
-    font-weight: bold;
-    font-size: 0.96rem;
+.btn-delete {
+    background-color: #ffd0d0;
+    color: #b30000;
 }
 
-@media (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
-        font-size: 0.8rem;
+.btn-edit:hover {
+    background-color: #fff68f;
+    transform: scale(1.05);
+}
+
+.btn-delete:hover {
+    background-color: #ff9e9e;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .admin-table {
+        font-size: 0.85rem;
     }
 
-    .container {
-        padding: 10px;
+    .btn-add {
+        font-size: 0.9rem;
+        padding: 8px 16px;
     }
 }

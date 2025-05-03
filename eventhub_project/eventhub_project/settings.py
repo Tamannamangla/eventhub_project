@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
     'bookings',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,6 @@ LOGIN_URL = '/login/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+# Razorpay test keys (use test keys now)
+RAZORPAY_KEY_ID = 'rzp_test_xxxxxxxxxx'  # Replace with your key
+RAZORPAY_KEY_SECRET = 'xxxxxxxxxxxxxxxx'  # Replace with your secret

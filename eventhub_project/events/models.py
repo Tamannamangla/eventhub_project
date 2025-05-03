@@ -80,7 +80,6 @@ class AdminProfile(models.Model):
     ]
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-  # use an existing user ID
     phone = models.CharField(max_length=15)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
@@ -144,7 +143,6 @@ class Feedback(models.Model):
 # Create your models here.
 class Event(models.Model):
     name = models.CharField(max_length=100)
-    # category = models.CharField(max_length=50)
     CATEGORY_CHOICES = [
         ('ceremony', 'Ceremony'),
         ('birthday', 'Birthday'),

@@ -249,10 +249,8 @@ header p {
 /* Button */
 .learn-more-btn {
   margin-top: 1rem;
-  /* background: linear-gradient(135deg, #ff6b81, #ff9a9e); */
+  text-decoration: none;
   background: linear-gradient(135deg, #61b0ff, #a1d6ff);
-
-
   border: none;
   padding: 0.6rem 1.4rem;
   border-radius: 30px;

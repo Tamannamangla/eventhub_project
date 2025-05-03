@@ -10,9 +10,7 @@ urlpatterns = [
     path('nightlife/', views.nightlife, name='nightlife'),
     path('holidays/', views.holiday, name='holidays'),
     path('dates/', views.dates, name='dates'),
-
     path('index2', views.index2, name='index2'),
-    # path('dashboard2', views.dashboard2, name='dashboard2'),
     path('dashboard3', views.dashboard3, name='dashboard3'),
 
     path('ticket/edit/<int:ticket_id>/', views.edit_ticket, name='edit_ticket'),

@@ -2,6 +2,30 @@ from django.db import models
 
 from django.conf import settings
 
+# class Ticket(models.Model):
+#     CATEGORY_CHOICES = [
+#         ('Music', 'Music'),
+#         ('Art', 'Art'),
+#         ('Food', 'Food'),
+#         ('Business', 'Business'),
+#         ('Hobbies', 'Hobbies'),
+#         ('Nightlife', 'Nightlife'),
+#         ('Holidays', 'Holidays'),
+#         ('Dates', 'Dates'),
+#     ]
+
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE) 
+#     name = models.CharField(max_length=200)
+#     location = models.CharField(max_length=200)
+#     time = models.CharField(max_length=100)
+#     price = models.CharField(max_length=50)
+#     image = models.ImageField(upload_to='ticket_images/')
+#     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
+
+#     def __str__(self):
+#         return self.name
+
+
 class Ticket(models.Model):
     CATEGORY_CHOICES = [
         ('Music', 'Music'),
@@ -21,6 +45,14 @@ class Ticket(models.Model):
     price = models.CharField(max_length=50)
     image = models.ImageField(upload_to='ticket_images/')
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
+    total_tickets = models.PositiveIntegerField(default=100)
+    available_quantity = models.PositiveIntegerField()
+
+    def available_tickets(self):  # ✅ New method
+        booked = sum(booking.quantity for booking in self.booking_set.all())
+        return max(0, self.total_tickets - booked)
+    def booked_tickets(self):
+        return self.total_tickets - self.available_quantity
 
     def __str__(self):
         return self.name

@@ -5,15 +5,31 @@
 {% block title %}Add Admin Page {% endblock %}
 {% block extra_css %}<link rel="stylesheet" href="{% static 'css/add_admin.css' %}">{% endblock %}
 {% block content %}
-    
-    <h2 class="text-center heading" style="text-align: center;">Add Admin</h2>
-    <div class="container admin-form-container">
+<div class="admin-container">
+    <h2 class="admin-heading">Add New Admin</h2>
+
+    <div class="admin-card">
         <form method="POST" enctype="multipart/form-data" class="admin-form">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn-submit">Add Admin</button>
-            <a href="{% url 'list_admins' %}" class="btn-view">View All Admins</a>
-            <a href="{% url 'super_admin_dashboard' %}" class="btn btn-success">Cancel</a>
+            <div class="form-grid">
+                {% for field in form %}
+                    <div class="form-group {% if field.field.widget.input_type == 'checkbox' %}checkbox-group{% endif %}">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="error">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn-submit">➕ Add Admin</button>
+                <a href="{% url 'list_admins' %}" class="btn-view">👀 View All Admins</a>
+                <a href="{% url 'super_admin_dashboard' %}" class="btn-cancel">❌ Cancel</a>
+            </div>
         </form>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
+

@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from events.views import APIView
+from .views import EventResource
 
 urlpatterns = [
 
@@ -37,7 +39,7 @@ urlpatterns = [
     path('edit/<int:event_id>/', views.edit_event, name='edit_event'),
     path('view/<int:event_id>/', views.view_event, name='view_event'),
     path('event/<int:event_id>/delete/', views.delete_event, name='delete_event'),
-
+    
     path('gallery/', views.gallery, name='gallery'),
     path('birthday2/', views.birthday2, name='birthday2'),
     path('birthday3/', views.birthday3, name='birthday3'),
@@ -45,6 +47,9 @@ urlpatterns = [
     path('party2/', views.party2, name='party2'),
     path('wed1/', views.wed1, name='wed1'),
     path('birthday1/', views.birthday1, name='birthday1'),
+    #
+    path('api/events/', EventResource.as_view(), name='event_list'),
+    path('api/events/<int:event_id>/', EventResource.as_view(), name='event_detail'),
 
 
 ]

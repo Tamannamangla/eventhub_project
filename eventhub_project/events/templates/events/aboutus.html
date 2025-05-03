@@ -1,49 +1,54 @@
 {% load static %}
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Event Management System</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>About EventHub</title>
     <link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <section class="about-hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>Welcome to <span>EventHive</span></h1>
+            <p>Your one-stop destination for organizing, managing & booking the best events in town.</p>
+            <a href="{% url 'home' %}" class="home-btn">← Back to Home</a>
+        </div>
+    </section>
 
-    <div class="floating-shapes"></div>
-    <div class="container">
-        <a href="{% url 'home' %}"> <i class="fa-solid fa-house fa-2x" style="color: #ffffff;"></i></a>
+    <section class="about-section">
+        <h2>Who Are We?</h2>
+        <p>EventHive is more than just a platform — it's an ecosystem where event managers, admins, and users come together to create unforgettable experiences. Whether you're booking tickets or managing a large-scale concert, we've got the tools, the tech, and the team to make it seamless.</p>
 
-        <h1>Welcome to Our Event Hive</h1>
-        <p>We craft extraordinary experiences, ensuring every event is seamlessly executed, from corporate summits to lavish weddings. Our cutting-edge platform facilitates effortless planning and management, bringing your dream event to reality.</p>
-        
-        <h2>Events We Masterfully Organize</h2>
-        <ul>
-            <li>Corporate Summits & Conferences</li>
-            <li>Luxury Weddings & Grand Receptions</li>
-            <li>Live Concerts & Music Festivals</li>
-            <li>Exclusive Birthday & Anniversary Galas</li>
-            <li>Charity Fundraisers & Community Events</li>
-            <li>Product Launches & Expos</li>
-        </ul>
+        <h2>What We Offer</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>🎟 Ticket Management</h3>
+                <p>Create, categorize, and manage events with images and dynamic details.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛒 Cart System</h3>
+                <p>Users can add, view, and manage ticket bookings like a real e-commerce experience.</p>
+            </div>
+            <div class="feature-card">
+                <h3>👥 Role-Based Dashboards</h3>
+                <p>Separate views and permissions for Admins, Event Managers, and Users for full control.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📈 Clean UI & UX</h3>
+                <p>Modern layouts with animations and a soft pastel color palette for an amazing user experience.</p>
+            </div>
+        </div>
 
-        <h2>Why Partner with Us?</h2>
-        <p>We provide innovative solutions that encompass venue selection, vendor coordination, guest management, and budget control. Our technology-driven approach ensures a hassle-free experience with real-time updates and precision planning.</p>
+        <h2>Our Mission</h2>
+        <p>We aim to simplify event booking & management for everyone with technology, design, and passion.</p>
 
-        <h2>Comprehensive Services</h2>
-        <ul>
-            <li>Expert Event Planning & Execution</li>
-            <li>Premium Vendor & Venue Management</li>
-            <li>Personalized Guest List Coordination</li>
-            <li>Budget Optimization & Financial Tracking</li>
-            <li>On-site Event Management & Support</li>
-        </ul>
+        <h2>Let's Connect</h2>
+        <p>Have questions or ideas? Reach out to us at <strong>contact@eventhub.com</strong> or call <strong>+91 98765 43210</strong>. We’d love to collaborate!</p>
 
-        <h2>Contact Us</h2>
-        <p>Let's make your event extraordinary! Reach out to us at <strong>contact@eventmanagement.com</strong> or call <strong>+123 456 7890</strong> for a consultation.</p>
-        
-        <a href="#" class="button">Get Started</a>
-    </div>
-
-    <script src="{% static 'css/aboutus.js' %}"></script>
+        <a href="{% url 'contact' %}" class="cta-btn">Get In Touch</a>
+    </section>
 </body>
 </html>

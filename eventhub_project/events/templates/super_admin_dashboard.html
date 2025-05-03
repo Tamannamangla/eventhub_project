@@ -8,13 +8,15 @@
 
 {% block content %}
 
+<body class="body1">
 
 
+<div class="container1">
 
-<div class="container">
-
-    <h1>Welcome, Superadmin {{ user.name }}!</h1>
-
+    <h1>Super Admin Dashboard</h1>
+    <hr><br>
+    <h3 style="text-align: center;">Welcome, {{ user.name }}!</h3>
+  <br>
     <div class="row">
         <!-- Add admin -->
         <div class="card">
@@ -46,4 +48,5 @@
        
     </div>
 </div>
+</body>
 {% endblock %}

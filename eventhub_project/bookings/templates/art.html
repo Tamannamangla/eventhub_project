@@ -43,8 +43,8 @@
                         <h2>{{ ticket.name }}</h2>
                         <p class="location">📍 {{ ticket.location }}</p>
                         <p class="time">🕒 {{ ticket.time }}</p>
-                        <p class="price">₹{{ ticket.price }}</p>
-                        <p>🎫 Category: {{ ticket.category }}</p>
+                        <p class="price"> ₹{{ ticket.price }}</p>
+                        <p>Available Tickets: {{ ticket.available_quantity }}</p>
                         <form method="post" action="{% url 'bookings:buy_ticket' ticket.id %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary">Buy Now</button>

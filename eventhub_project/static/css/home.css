@@ -370,7 +370,7 @@ body {
 }
 
 .faq .accordion-button:not(.collapsed) {
-    background:linear-gradient(to bottom ,rgb(230, 170, 109), rgb(240, 134, 63));
+    background:linear-gradient(to bottom ,rgb(109, 180, 230), rgb(63, 157, 240));
     color: white;
 }
 

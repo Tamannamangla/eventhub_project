@@ -3,16 +3,70 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
-from django.urls import reverse
-
-from django.contrib.auth import get_user_model
-User = get_user_model() # Use your custom user model
-
 from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
+from django.urls import reverse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 from .models import AdminProfile,EventManager , Feedback , Event
 from .forms import AdminFullForm, EventForm
+import requests
 
+User = get_user_model() 
+
+class EventResource(APIView):
+    def get(self, request, event_id=None):
+        if event_id:
+      
+            flask_url = f'http://127.0.0.1:8080/api/events/{event_id}'
+            response = requests.get(flask_url)
+            if response.status_code == 200:
+          
+                event = response.json()
+                return Response(event)
+            else:
+                return Response({"message": "Event not found in Flask API"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+      
+            flask_url = 'http://127.0.0.1:8080/api/events'
+            response = requests.get(flask_url)
+            if response.status_code == 200:
+                events = response.json()
+                return Response({"events": events})
+            else:
+                return Response({"message": "Failed to fetch events from Flask API"}, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request):
+        data = request.data
+        flask_url = 'http://127.0.0.1:8080/api/events' 
+        response = requests.post(flask_url, json=data) 
+        if response.status_code == 201:
+            return Response({"message": "Event created successfully in Flask API"}, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"message": "Failed to create event in Flask API"}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+    def put(self, request, event_id):
+        data = request.data
+        flask_url = f'http://127.0.0.1:8080/api/events/{event_id}'  
+        response = requests.put(flask_url, json=data) 
+        if response.status_code == 200:
+            return Response({"message": "Event updated successfully in Flask API"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Failed to update event in Flask API"}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, event_id):
+        flask_url = f'http://127.0.0.1:8080/api/events/{event_id}'  
+        response = requests.delete(flask_url)  
+        if response.status_code == 200:
+            return Response({"message": "Event deleted successfully from Flask API"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"message": "Failed to delete event from Flask API"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        
 # Create your views here.
 def about(request):
     return render(request, 'events/aboutus.html')
@@ -82,8 +136,6 @@ def login_view(request):
                     return redirect(next_url)
                 else:
                     return redirect('home') 
-                # return redirect(next_url)
-                # return redirect('home')
             else:
                 messages.error(request, "Invalid credentials: Role mismatch")
         else:
@@ -139,7 +191,6 @@ def add_admin(request):
     if request.method == 'POST':
         form = AdminFullForm(request.POST)
         if form.is_valid():
-            # Step 1: Create Django User
             user = User.objects.create_user(
                 email=form.cleaned_data['email'],
                 name=form.cleaned_data['name'],
@@ -174,12 +225,9 @@ def edit_admin(request, admin_id):
 
     if request.method == 'POST':
         form = AdminFullForm(request.POST, instance=admin)
-        form.fields.pop('password', None)  # ✅ Hide password field in edit
+        form.fields.pop('password', None) 
         if form.is_valid():
-            # Update AdminProfile part
             admin_profile = form.save(commit=False)
-
-            # Update CustomUser part
             user.name = form.cleaned_data['name']
             user.email = form.cleaned_data['email']
             user.phone = form.cleaned_data['phone']
@@ -203,7 +251,7 @@ def edit_admin(request, admin_id):
             'social_media': admin.social_media,
             'notifications': admin.notifications,
         }, instance=admin)
-        form.fields.pop('password', None)  # ✅ Hide password field in GET also
+        form.fields.pop('password', None) 
 
     return render(request, 'edit_admin.html', {'form': form})
 
@@ -211,7 +259,7 @@ def delete_admin(request, admin_id):
     admin = get_object_or_404(AdminProfile, id=admin_id)
     user = admin.user
     admin.delete()
-    user.delete()  # Deletes the linked auth_user entry as well
+    user.delete()  
     return redirect('list_admins')
 
 # event managers
@@ -229,8 +277,7 @@ def add_event_manager(request):
         address = request.POST.get('address')
         if password:
             EventManager.password=password
-            
-        # Check if product already exists for this user
+
         if EventManager.objects.filter(email=email).exists():
             messages.error(request, 'An event manager with this email already exists.')
             return redirect('add_event_manager')
@@ -251,8 +298,6 @@ def add_event_manager(request):
             messages.success(request, 'Manager added successfully!')
             return redirect('add_event_manager')
 
-
-    #  Fetch all products if superuser, else only their own
     if request.user.is_superuser:
         event_manager = EventManager.objects.all()
     else:
@@ -264,7 +309,6 @@ def add_event_manager(request):
 @login_required
 def delete_event_manager(request, product_id):
     product = EventManager.objects.get(id=product_id)
-    # Check if the product belongs to the logged-in user or if user is superuser
     if request.user == product.user or request.user.is_superuser:
         product.delete()
         messages.success(request, 'Manager deleted successfully!')
@@ -287,7 +331,6 @@ def update_event_manager(request, product_id):
 
     if request.method == 'POST':
         event_manager.name = request.POST.get('name')
-        # event_manager.email = request.POST.get('email')
         event_manager.phone = request.POST.get('phone')
         event_manager.password = request.POST.get('password')  # 👈 Ensure this is included
         event_manager.gender = request.POST.get('gender')
@@ -308,11 +351,8 @@ def update_event_manager(request, product_id):
 
 @login_required
 def add_event(request):
-    form = EventForm(request.POST or  None)  # ✅ include FILES
+    form = EventForm(request.POST or  None) 
     if form.is_valid():
-        # event = form.save(commit=False)
-        # event.user = request.user  # ✅ (only if your Event model has a `user` ForeignKey)
-        # event.save()
         form.save()
         return redirect('dashboard')
     return render(request, 'form.html', {'form': form, 'title': 'Add Event'})
@@ -342,7 +382,8 @@ def delete_event(request, event_id):
         event.delete()
         return redirect('dashboard') 
     return render(request, 'delete.html', {'event': event})
-#
+
+# profile view
 @login_required
 def profile(request):
     if not request.user.is_superuser:
@@ -373,11 +414,9 @@ def edit_profile(request):
         form.fields.pop('password', None)  # no password edit here
         form.fields.pop('role', None)
 
-
         if form.is_valid():
+            
             profile = form.save(commit=False)
-
-            # Update user fields (CustomUser)
             user = request.user
             user.name = form.cleaned_data['name']
             user.email = form.cleaned_data['email']

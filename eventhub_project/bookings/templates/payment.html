@@ -92,75 +92,36 @@
                     </div>
                 </div>
             </div>
-              <!-- Payment Summary -->
-    <section class="payment-summary">
+            <!-- Payment Summary -->
+            <section class="payment-summary">
 
-        <form method="POST">
-            {% csrf_token %}
-            <h3 id="product-price">Order Summary</h3>
-            <h4>Total: ₹<span id="total">{{ total }}</span></h4>
-            <h4><span>Shipping: Free</span></h4>
-            <h3>Total: ₹<span id="total">{{ total }}</span></h3>
-            <!-- All input fields here -->
-            <button type="submit">Complete Payment</button>
-        </form>
+                <form method="POST">
+                    {% csrf_token %}
+                    <h3 id="product-price">Order Summary</h3>
+                    <h4>Total: ₹<span id="total">{{ total }}</span></h4>
+                    <h4><span>Shipping: Free</span></h4>
+                    <h3>Total: ₹<span id="total">{{ total }}</span></h3>
+                    <!-- All input fields here -->
+                    <button type="submit">Complete Payment</button>
+                </form>
 
-</section>
+            </section>
+            <section>
+
+                <p>Total Amount: ₹{{ total }}</p>
+
+            </section>
     </section>
-  
+
 
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 . All rights reserved.</p>
-            <p>For inquiries, email us at <a
-                    href="mailto:support@motivationalebooks.com">support@Eventhive.com</a></p>
+            <p>For inquiries, email us at <a href="mailto:support@motivationalebooks.com">support@Eventhive.com</a></p>
         </div>
     </footer>
-    <script>
-        // Wait until the DOM content is fully loaded
-document.addEventListener('DOMContentLoaded', function () {
-    // Function to update the payment summary with the cart total and item total
-    function updatePaymentSummary() {
-        // Retrieve the cart data from localStorage
-        const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
-
-        // Calculate the total payment (sum of all item prices)
-        let cartTotal = 0;
-        cartData.forEach(item => {
-            cartTotal += parseFloat(item.price);  // Add each item's price to the total
-        });
-
-        // Store the total in localStorage for future reference
-        localStorage.setItem('cartTotal', cartTotal.toFixed(2));
-
-        // Update the payment total elements
-        const totalElement = document.getElementById('total');
-        const itemsTotalElement = document.getElementById('items-total');
-        if (totalElement && itemsTotalElement) {
-            totalElement.textContent = `$${cartTotal.toFixed(2)}`;  // Format to two decimal places
-            itemsTotalElement.textContent = `$${cartTotal.toFixed(2)}`;
-        } else {
-            console.error("Payment elements not found.");
-        }
-
-        // Create an object to store the relevant data for debugging or further use
-        const data = {
-            itemTotalText: itemsTotalElement ? itemsTotalElement.textContent : null,
-            totalText: totalElement ? totalElement.textContent : null,
-            cartData: cartData,
-            allScripts: Array.from(document.querySelectorAll('script')).map(script => script.textContent)
-        };
-
-        // Log the data object for debugging purposes
-        console.log('Payment Summary Data:', data);
-    }
-
-    // Call the function to update the payment summary on page load
-    updatePaymentSummary();
-});
-    </script>
 </body>
 
 </html>
