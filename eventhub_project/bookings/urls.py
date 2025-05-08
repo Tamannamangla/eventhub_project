@@ -19,5 +19,9 @@ urlpatterns = [
     path('buy_ticket/<int:ticket_id>/', views.buy_ticket, name='buy_ticket'),
     path('cart/', views.view_cart, name='view_cart'),
     path('payment/', views.payment_view, name='payment'),
+
+    path('api/tickets/', views.TicketListCreateAPIView.as_view(), name='ticket-list-create'),
+    path('api/bookings/', views.BookingListCreateAPIView.as_view(), name='booking-list-create'),
 ]
+
 app_name = 'bookings'

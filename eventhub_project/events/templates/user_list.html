@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Users</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif; /* Modern and clean font */
+      background: linear-gradient(120deg, #a1c4fd, #c2e9fb); /* Soft blue gradient */
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 40px 0 30px;
+      font-size: 3rem; /* Increased font size */
+      font-family: 'Poppins', sans-serif; /* Stylish font */
+      background: linear-gradient(to right, #ff6a88, #d9a7c7); /* Bold gradient for the heading */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800; /* Bolder font weight */
+      letter-spacing: 2px; /* Increased letter-spacing */
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15); /* Adds depth and impact */
+    }
+
+    .user-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 40px 60px;
+    }
+
+    .user-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.8); /* Soft white with opacity */
+      border-radius: 20px;
+      padding: 30px 20px 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      overflow: hidden;
+    }
+
+    .user-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(to right, #ffb6b9, #ff9a9e); /* Soft pink gradient */
+      color: white;
+      font-size: 2rem; /* Larger font size */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-name {
+      font-size: 1.6rem; /* Larger font size */
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 6px;
+      text-transform: capitalize; /* Capitalize first letter of each name */
+    }
+
+    .user-email {
+      font-size: 1rem; /* Increased size for better readability */
+      color: #444;
+      margin-bottom: 8px;
+      font-style: italic; /* Adding a slight style for differentiation */
+    }
+
+    .user-role {
+      background: linear-gradient(to right, #ffb6b9, #f7a6c1); /* Light pink gradient */
+      display: inline-block;
+      padding: 8px 16px; /* Increased padding for a more prominent look */
+      border-radius: 25px;
+      font-size: 1rem; /* Larger font size */
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 12px;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-card:hover .user-role {
+      transform: scale(1.1);
+    }
+
+    .user-hobbies {
+      font-size: 1rem; /* Slightly larger for better readability */
+      font-style: italic;
+      color: #555;
+    }
+
+    /* Animated floating gradient effect */
+    .user-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05), transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05), transparent 50%);
+      animation: floatGlow 10s linear infinite;
+      z-index: 0;
+    }
+
+    .user-card * {
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(30px, 30px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem; /* Adjusted for smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Meet Our Users</h1>
+  <div class="user-container">
+    {% for user in users %}
+      <div class="user-card">
+        <div class="user-avatar">{{ user.name|slice:":1" }}</div>
+        <div class="user-name">{{ user.name }}</div>
+        <div class="user-email">{{ user.email }}</div>
+        <div class="user-role">{{ user.role }}</div>
+        <div class="user-hobbies">Hobbies: {{ user.hobbies }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

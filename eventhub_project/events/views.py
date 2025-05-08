@@ -10,63 +10,113 @@ from django.urls import reverse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
 from .models import AdminProfile,EventManager , Feedback , Event
 from .forms import AdminFullForm, EventForm
 import requests
 
 User = get_user_model() 
 
-class EventResource(APIView):
-    def get(self, request, event_id=None):
-        if event_id:
-      
-            flask_url = f'http://127.0.0.1:8080/api/events/{event_id}'
-            response = requests.get(flask_url)
-            if response.status_code == 200:
-          
-                event = response.json()
-                return Response(event)
+FLASK_API_BASE = "http://127.0.0.1:8080"
+
+def all_events(request):
+    try:
+        headers = {"Accept": "application/json"}
+        response = requests.get(f"{FLASK_API_BASE}/api/events",headers=headers)
+        response.raise_for_status()
+
+        print(" Raw Response JSON:", response.json()) 
+        event_dicts = response.json().get("events", [])
+        print(" Extracted events:", event_dicts)
+        
+        # Convert list of dicts to list of namedtuples for dot-access in templates
+        Event = namedtuple("Event", event_dicts[0].keys()) if event_dicts else None
+        events = [Event(**{**e, "id": int(e["id"])}) for e in event_dicts] if Event else []
+
+        
+    except requests.exceptions.RequestException:
+        events = []
+
+    return render(request, 'event_list.html', {"events": events})
+
+def all_feedbacks(request):
+    try:
+        response = requests.get(f"{FLASK_API_BASE}/api/feedback")
+        response.raise_for_status()
+        feedbacks = response.json().get("feedbacks", [])
+    except requests.exceptions.RequestException:
+        feedbacks = []
+    return render(request, 'feedback_list.html', {"feedbacks": feedbacks})
+
+
+def all_users(request):
+    try:
+        response = requests.get(f"{FLASK_API_BASE}/api/users")
+        response.raise_for_status()
+        users = response.json().get("users", [])
+    except requests.exceptions.RequestException:
+        users = []
+        
+    return render(request, 'user_list.html', {"users": users})
+
+def edit__event(request, event_id):
+    event_url = f"{FLASK_API_BASE}/api/events/{event_id}"
+
+    if request.method == "POST":
+        updated_data = {
+            "name": request.POST.get("name"),
+            "description": request.POST.get("description"),
+            "date": request.POST.get("date"),
+            "location": request.POST.get("location"),
+            "category": request.POST.get("category"),
+        }
+
+        try:
+            response = requests.put(event_url, json=updated_data)
+            response.raise_for_status()
+            messages.success(request, "Event updated successfully.")
+            return redirect('all_events')
+        except requests.exceptions.RequestException as e:
+            messages.error(request, f"Error updating event: {e}")
+
+    try:
+        response = requests.get(event_url)
+        response.raise_for_status()
+        event_data = response.json() 
+        Event = namedtuple("Event", event_data.keys())
+        event = Event(**event_data) 
+    except requests.exceptions.RequestException:
+        event = None
+        messages.error(request, "Failed to load event.")
+
+    return render(request, "edit__event.html", {"event": event})
+
+def delete__event(request, event_id):
+    if request.method == "POST":
+        # Ensure the event_id is a valid positive integer
+        if not isinstance(event_id, int) or event_id <= 0:
+            messages.error(request, "Invalid Event ID.")
+            return redirect('all_events')
+
+        try:
+            response = requests.delete(f"{FLASK_API_BASE}/api/events/{event_id}")
+            response.raise_for_status()
+
+            if response.status_code == 204:
+                messages.success(request, "Event deleted successfully.")
             else:
-                return Response({"message": "Event not found in Flask API"}, status=status.HTTP_404_NOT_FOUND)
-        else:
-      
-            flask_url = 'http://127.0.0.1:8080/api/events'
-            response = requests.get(flask_url)
-            if response.status_code == 200:
-                events = response.json()
-                return Response({"events": events})
+                messages.warning(request, "Unexpected response from the server.")
+
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 404:
+                messages.error(request, "Event not found.")
             else:
-                return Response({"message": "Failed to fetch events from Flask API"}, status=status.HTTP_400_BAD_REQUEST)
+                messages.error(request, f"HTTP Error: {e}")
 
-    def post(self, request):
-        data = request.data
-        flask_url = 'http://127.0.0.1:8080/api/events' 
-        response = requests.post(flask_url, json=data) 
-        if response.status_code == 201:
-            return Response({"message": "Event created successfully in Flask API"}, status=status.HTTP_201_CREATED)
-        else:
-            return Response({"message": "Failed to create event in Flask API"}, status=status.HTTP_400_BAD_REQUEST)
-        
+        except requests.exceptions.RequestException as e:
+            messages.error(request, f"Error deleting event: {e}")
 
-    def put(self, request, event_id):
-        data = request.data
-        flask_url = f'http://127.0.0.1:8080/api/events/{event_id}'  
-        response = requests.put(flask_url, json=data) 
-        if response.status_code == 200:
-            return Response({"message": "Event updated successfully in Flask API"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"message": "Failed to update event in Flask API"}, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, event_id):
-        flask_url = f'http://127.0.0.1:8080/api/events/{event_id}'  
-        response = requests.delete(flask_url)  
-        if response.status_code == 200:
-            return Response({"message": "Event deleted successfully from Flask API"}, status=status.HTTP_200_OK)
-        else:
-            return Response({"message": "Failed to delete event from Flask API"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        
+    return redirect('all_events')
+   
 # Create your views here.
 def about(request):
     return render(request, 'events/aboutus.html')
@@ -149,8 +199,7 @@ def logout_view(request):
 
 def index(request):
     return render(request,'index.html')
-
-
+from collections import namedtuple
 @login_required
 def super_admin_dashboard(request):
     if not request.user.is_authenticated:

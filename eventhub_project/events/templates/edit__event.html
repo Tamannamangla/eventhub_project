@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Edit Event</h2>
+{% if event %}
+<form method="post">
+  {% csrf_token %}
+  <label>Name:</label>
+  <input type="text" name="name" value="{{ event.name }}" required>
+
+  <label>Description:</label>
+  <textarea name="description">{{ event.description }}</textarea>
+
+  <label>Date:</label>
+  <input type="text" name="date" value="{{ event.date }}"><br>
+
+  <label>Location:</label>
+  <input type="text" name="location" value="{{ event.location }}"><br>
+
+  <label>Category:</label>
+  <input type="text" name="category" value="{{ event.category }}">
+  <button type="submit">Update Event</button>
+</form>
+{% else %}
+  <p>Event could not be loaded.</p>
+{% endif %}
+
+    
+</body>
+</html>

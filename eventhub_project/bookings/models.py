@@ -2,29 +2,6 @@ from django.db import models
 
 from django.conf import settings
 
-# class Ticket(models.Model):
-#     CATEGORY_CHOICES = [
-#         ('Music', 'Music'),
-#         ('Art', 'Art'),
-#         ('Food', 'Food'),
-#         ('Business', 'Business'),
-#         ('Hobbies', 'Hobbies'),
-#         ('Nightlife', 'Nightlife'),
-#         ('Holidays', 'Holidays'),
-#         ('Dates', 'Dates'),
-#     ]
-
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE) 
-#     name = models.CharField(max_length=200)
-#     location = models.CharField(max_length=200)
-#     time = models.CharField(max_length=100)
-#     price = models.CharField(max_length=50)
-#     image = models.ImageField(upload_to='ticket_images/')
-#     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
-
-#     def __str__(self):
-#         return self.name
-
 
 class Ticket(models.Model):
     CATEGORY_CHOICES = [
